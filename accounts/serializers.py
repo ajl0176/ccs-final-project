@@ -1,20 +1,20 @@
+from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from rest_auth.models import TokenModel
 
 
-from .models import Profile
+user = get_user_model
 
 
-class ProfileSerializer(serializers.ModelSerializer):
-    user = serializers.ReadOnlyField(source='user.username')
+class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Profile
-        fields = ('id', 'user')
+        model = User
+        fields = ('id', 'username', 'email', 'is_staff')
 
 class TokenSerializer(serializers.ModelSerializer):
-    is_staff = serializers.ReadOnlyField(source = 'user.is_staff')
+    user = UserSerializer()
 
     class Meta:
         model = TokenModel
-        fields = ('key', 'is_staff')
+        fields = ('key', 'user')

@@ -1,0 +1,11 @@
+<h1>Wild Thyme Menu</h1>
+
+<ul>
+  {% for menu in object_list %}
+  <li>
+    <h3>{{menu.item}} {{menu.price}}</h3>
+
+    <p>{{menu.description}}</p>
+  </li>
+  {% endfor %}
+</ul>
