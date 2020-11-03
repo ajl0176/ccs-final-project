@@ -1,9 +1,8 @@
-from django.urls import include, path
-
+from django.urls import path
 from . import views
 
-app_name = 'frontend'
+app_name = "frontend"
 
 urlpatterns = [
-    path('', views.IndexView.as_view(), name='index'),
+    path('', views.IndexView.as_view(), name = 'index'),
 ]

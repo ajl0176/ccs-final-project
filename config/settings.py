@@ -53,8 +53,11 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
 
     #Local
-    'frontend.apps.FrontendConfig',
+    'api.apps.ApiConfig',
     'accounts.apps.AccountsConfig',
+    'frontend.apps.FrontendConfig',
+    'menu.apps.MenuConfig',
+
 ]
 
 REST_FRAMEWORK = {
@@ -173,6 +176,7 @@ AWS_SECRET_ACCESS_KEY =os.environ['AWS_SECRET_ACCESS_KEY']
 AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
+API_KEY = os.environ['API_KEY']
 
 # https://docs.djangoproject.com/en/3.0/ref/settings/#std:setting-SITE_ID
 SITE_ID = 1
@@ -183,5 +187,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # https://django-rest-auth.readthedocs.io/en/latest/configuration.html
 REST_AUTH_SERIALIZERS = {
-    'TOKEN_SERIALIZER': 'accounts.serializers.TokenSerializer',
+    'TOKEN_SERIALIZER': 'menu.serializers.TokenSerializer',
 }

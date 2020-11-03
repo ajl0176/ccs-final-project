@@ -5,13 +5,11 @@ from django.views.generic import View
 from django.http import HttpResponse
 from django.conf import settings
 
-
 class IndexView(View):
     """
     Serves the compiled frontend entry point (only works if you have run `npm
     run build`).
     """
-
     def get(self, request, *args, **kwargs):
         try:
             with open(os.path.join(settings.REACT_APP_DIR, 'build', 'index.html')) as f:
