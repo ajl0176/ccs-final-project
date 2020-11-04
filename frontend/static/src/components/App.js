@@ -22,7 +22,7 @@ export default function App() {
              <Link to="/">Home</Link>
            </li>
            <li>
-             <Link to="/about">Menu</Link>
+             <Link to="/menu">Menu</Link>
            </li>
            <li>
              <Link to="/users">Users</Link>
@@ -30,8 +30,8 @@ export default function App() {
          </ul>
        </nav>
        <Switch>
-          <Route path="/about">
-            <About />
+          <Route path="/menu">
+            <Menu />
           </Route>
           <Route path="/users">
             <Users />
@@ -49,8 +49,8 @@ export default function App() {
     return <h2>Home</h2>;
   }
 
-  function About() {
-    return <h2>About</h2>;
+  function Menu() {
+    return <h2>Menu</h2>;
   }
 
   function Users() {
