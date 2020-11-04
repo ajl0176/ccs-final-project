@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
+    'allauth',
     'allauth.account',
     'allauth.socialaccount',
 
@@ -66,6 +67,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
+        # keep sessionauthentication for the browsable api
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
     ]
@@ -187,5 +189,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # https://django-rest-auth.readthedocs.io/en/latest/configuration.html
 REST_AUTH_SERIALIZERS = {
-    'TOKEN_SERIALIZER': 'menu.serializers.TokenSerializer',
+    'TOKEN_SERIALIZER': 'accounts.serializers.TokenSerializer',
 }

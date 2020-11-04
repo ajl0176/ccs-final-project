@@ -1,10 +1,7 @@
-from django.urls import path
+from django.urls import path, include
 
-
-from .views import MenuListView
-
-app_name = "menu"
+from .views import MenuListAPIView
 
 urlpatterns = [
-    path('', MenuListView.as_view(), name="menu")
+    path('', MenuListAPIView.as_view(), name="menu"),
 ]

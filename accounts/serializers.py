@@ -3,14 +3,15 @@ from rest_framework import serializers
 from rest_auth.models import TokenModel
 
 
-user = get_user_model
+User = get_user_model()
 
 
 class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'is_staff')
+        fields = ('id', 'username',)
+
 
 class TokenSerializer(serializers.ModelSerializer):
     user = UserSerializer()

@@ -1,8 +1,12 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+
+from rest_framework import generics
 
 from .models import Menu
+from .serializers import MenuSerializer
 
-class MenuListView(ListView):
-    model = Menu
-    template_name = 'menu_list.html'
+
+
+class MenuListAPIView (generics.ListCreateAPIView):
+    queryset = Menu.objects.all()
+    serializer_class = MenuSerializer

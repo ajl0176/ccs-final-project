@@ -19,7 +19,10 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/', include('api.urls')),
+    path('api/v1/', include('api.urls', namespace='api')),
+    path('auth-api/', include('rest_framework.urls')),
+    path('rest-auth/', include('accounts.urls')),
     path('', include('frontend.urls', namespace='frontend')),
+
     # allows you to login/out of the browsable api
 ]
