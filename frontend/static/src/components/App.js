@@ -1,16 +1,32 @@
-// import React, { Component } from 'react';
+import React, { Component } from 'react';
 // // import './index.css';
-// import LoginForm from './LoginForm';
-// import MenuForm from './MenuForm';
-// import MenuList from './MenuList';
+import LoginForm from './LoginForm';
+import MenuForm from './MenuForm';
+import MenuList from './MenuList';
+import OrderForm from './OrderForm';
 // import './App.css';
-import React from "react";
+// import React from "react";
 import {
  BrowserRouter as Router,
  Switch,
  Route,
  Link
 } from "react-router-dom";
+
+
+// class App extends Component{
+//   constructor(props){
+//     super(props)
+//
+//     this.state ={
+//
+//     }
+//
+//   }
+// }
+
+
+
 
 export default function App() {
  return (
