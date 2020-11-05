@@ -1,54 +1,72 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router,Switch,Route, Link } from "react-router-dom";
-// // import './index.css';
-import LoginForm from './LoginForm';
-// import MenuForm from './MenuForm';
+import { Switch,Route, Link, withRouter } from "react-router-dom";
 import MenuList from './MenuList';
 import OrderForm from './OrderForm';
 import Location from './Location';
 import Menu from './Menu';
-// import './App.css';
-// import React from "react";
-
-
+import Registration from './Registration';
+import LoginForm from './LoginForm';
+import Nav from './Nav';
+import Cookies from 'js-cookie'
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isAuth: !!Cookies.get('Authorization')
+    }
+
+    this.handleLogin = this.handleLogin.bind(this);
+    this.handleRegistration = this.handleRegistration.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
+  }
+
+  async handleRegistration(event, user) {
+    event.preventDefault();
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        'X-CSRFToken': Cookies.get("csrftoken"),
+      },
+      body: JSON.stringify(user)
+    };
+
+    const handleError = (err) => console.warn(err);
+    const response = await fetch('/rest-auth/registration/', options).catch(handleError);
+    const data = await response.json().catch(handleError);
+
+    Cookies.set('Authorization', `Token ${data.key}`);
+    this.setState({isAuth: true}, () => this.props.history.push('/menu'))
+
+  }
+
+  handleLogin() {
+
+  }
+
+  handleLogout() {
+
+  }
+
   render() {
     return (
-      <Router>
         <div>
-          <nav className="navbar navbar-expand-lg navbar bg-light">
-          <ul className="navbar-nav mr-auto">
-            <li><Link to={'/'} className="nav-link"> Home </Link></li>
-            <li><Link to={'/MenuList'} className="nav-link"> Menu </Link></li>
-            <li><Link to={'/location'} className="nav-link"> Location </Link></li>
-            <li><Link to={'/OrderForm'} className="nav-link"> Check Out </Link></li>
-            <li><Link to={'/LoginForm'} className="nav-link"> Log-In </Link></li>
-          </ul>
-          </nav>
-          <hr />
+          <Nav />
           <Switch>
-            <Route exact path='/' />
-            <Route path='/menulist' component={MenuList} />
+            <Route path='/menu' component={Menu} />
             <Route path='/location' component={Location} />
-            <Route path='/orderform' component={OrderForm} />
-            <Route path='/loginform' component={LoginForm} />
+            <Route path='/checkout' component={Menu} />
+            <Route path='/login' render={(props) => <LoginForm isAuth={this.state.isAuth} handleLogin={this.handleLogin} />}/>
+            <Route path='/registration' render={(props) => <Registration isAuth={this.state.isAuth} handleRegistration={this.handleRegistration} />}/>
          </Switch>
         </div>
-
-
-          <h1> Organic on the Go</h1>
-
-
-      </Router>
-
-
     );
-
   }
 }
 
-export default App;
+export default withRouter(App);
 
 
 

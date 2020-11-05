@@ -26,7 +26,7 @@ const subtotal = this.props.order.reduce((acc, item)=> {
 
 
         <div className="d-flex" key={index}>
-            <h5 className="col-8">{item.item}</h5>
+            <h5 className="col-8">{item.entree}</h5>
             <h5 className="col-2">${item.price}</h5>
             <button type="button" className="btn col-2" onClick={()=>this.props.deleteOrder(item)}>Delete</button>
         </div>

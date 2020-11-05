@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 
-class MenuItem extends Component  {
+class FoodItem extends Component {
 
   constructor(props){
     super(props);
@@ -16,7 +16,7 @@ class MenuItem extends Component  {
           <ul className="menu-list">
             <div className="list-group-item list-group-item-action">
               <div className="row ">
-                <h5 className="col-10 ">{this.props.item.entree}</h5>
+                <h5 className="col-10 ">{this.props.item.menuitem}</h5>
                 <h5 className="col-2">${this.props.item.price}</h5>
               </div>
                 <p className="col-md-auto mb-1"> {this.props.item.description}</p>
@@ -33,17 +33,14 @@ class MenuItem extends Component  {
 class MenuList extends Component {
 
   render() {
-    const Menuitem = this.props.Menuitem.map((menuitem)=> <Menuitem  addOrder={this.props.addOrder} deleteOrder={this.props.deleteORder} subtotal={this.props.subtotal} item={menuitem}/>);
-    // const proteins = this.props.proteins.map((protein)=> <MenuItem addOrder={this.props.addOrder} deleteOrder={this.props.deleteORder} subtotal={this.props.subtotal} item={protein}/>);
-    // const veggies = this.props.vegggies.map((veggie)=> <MenuItem addOrder={this.props.addOrder} deleteOrder={this.props.deleteORder} subtotal={this.props.subtotal} item={veggie}/>);
-    // const highcarbs = this.props.highcarbs.map((highcarb)=> <MenuItem addOrder={this.props.addOrder} deleteOrder={this.props.deleteORder} subtotal={this.props.subtotal} item={highcarb}/>);
+    // const menuitems = this.props.menuitems.map((menuitem)=> <FoodItem  addOrder={this.props.addOrder} deleteOrder={this.props.deleteOrder} subtotal={this.props.subtotal} item={menuitem}/>);
 
     return(
 
       <div className="col">
         <div className="col-12">
         <h2 className="foodCategory">Menu</h2>
-      {Menuitem}
+    
 
       </div>
       </div>
