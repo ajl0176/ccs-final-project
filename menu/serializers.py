@@ -1,10 +1,10 @@
 from rest_framework import serializers
 
 
-from .models import Menu
+from .models import Menuitem
 
 
 class MenuSerializer (serializers.ModelSerializer):
     class Meta:
-        model = Menu
-        fields = ('item', 'price', 'description', 'image')
+        model = Menuitem
+        fields = ('entree','price', 'description', 'image')
