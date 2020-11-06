@@ -1,7 +1,8 @@
 from django.urls import path, include
 
-from .views import MenuitemListAPIView
+from .views import MenuitemListAPIView, AdminMenuitemListCreateView
 
 urlpatterns = [
     path('', MenuitemListAPIView.as_view(), name="menuitem"),
+    path('admin-view/', AdminMenuitemListCreateView.as_view()),
 ]
