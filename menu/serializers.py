@@ -8,4 +8,5 @@ class MenuSerializer (serializers.ModelSerializer):
 
     class Meta:
         model = Menuitem
-        fields = ('entree','price', 'description', 'image')
+        fields = ('entree','price', 'description', 'image', 'user')
+        

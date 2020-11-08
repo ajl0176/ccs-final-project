@@ -1,14 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './Nav.css';
 
 function Nav(props) {
   return(
     <React.Fragment>
-    <h1> Organic on the Go</h1>
-    <nav className="navbar navbar-expand-lg navbar bg-light">
+    <nav className="navbar">
     <ul className="navbar-nav mr-auto">
       <li><Link to={'/home'} className="nav-link">Home</Link></li>
+      {props.isAuth
+      ?
+      <li><Link to ={'/menuform'} className="nav-link">Menu Form</Link></li>
+      :
       <li><Link to={'/menu'} className="nav-link">Menu</Link></li>
+    }
       <li><Link to={'/location'} className="nav-link">Location</Link></li>
       {props.isAuth
         ?
@@ -18,11 +23,15 @@ function Nav(props) {
       }
 
 
+
     </ul>
     </nav>
+    <div>
+      <hr />
+    </div>
 
-    <hr />
     </React.Fragment>
+
   )
 }
 

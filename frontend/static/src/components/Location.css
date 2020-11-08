@@ -1,0 +1,17 @@
+.container {
+margin-left: 50px;
+}
+
+.location-text{
+  display: flex;
+  vertical-align: middle;
+  float: right;
+}
+
+.col-location {
+  float: right;
+}
+
+h1 {
+  width:600px;
+}

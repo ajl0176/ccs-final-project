@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Cookies from 'js-cookie';
-import Menu from ',/Menu';
 
 
 class MenuForm extends Component {
@@ -12,7 +11,7 @@ class MenuForm extends Component {
       entree: '',
       price: '',
       description: '',
-      image: '',
+      image: null,
     }
     this.handleChange = this.handleChange.bind(this);
     this.addItem = this.addItem.bind(this);
@@ -41,16 +40,19 @@ class MenuForm extends Component {
     reader.readAsDataURL(file);
 }
 
-  async addItem(e){
+    addItem(e){
     e.preventDefault();
 
     const csrftoken = Cookies.get('csrftoken');
 
     // you have to use form data with images
-    const formData = new FormData();
-    const keys = Object.keys(this.state);
-    keys.forEach(key => formData.append(key, this.state[key]));
-
+    let formData = new FormData();
+    let keys = Object.keys(this.state);
+    formData.append('entree', this.state.entree);
+    formData.append('price', this.state.price);
+    formData.append('description', this.state.description);
+    formData.append('image', this.state.image);
+    console.log(formData);
     const options = {
        method: 'POST',
        headers: {
@@ -58,13 +60,10 @@ class MenuForm extends Component {
        },
        body: formData
     };
-    const handleError = (err) => console.warn(err);
-    const response = await fetch('/api/v1/menuItems/', options);
-    const data = await response.json().catch(handleError);
-    console.log(data);
-    if (data.key){
-      Cookies.set('Authorization', `Token ${data.key}`)
-    }
+    fetch('/api/v1/menuitems/form/', options)
+    .then(response => response.json())
+    .then(data => console.log(data))
+
 };
 
 
@@ -74,11 +73,11 @@ render(){
     <form className="col-12 col-md-6 form" onSubmit={(e) => this.addItem(e)}>
       <div className="form group" >
         <label htmlFor="Entree">Entree</label>
-        <input type="text" className="form-control" id="item" name="item" value={this.state.item} onChange={this.handleChange}/>
+        <input type="text" className="form-control" id="entree" name="entree" value={this.state.entree} onChange={this.handleChange}/>
         <label htmlFor="price">Price</label>
-        <input type="text" className="form-control" id="item" name="item" value={this.state.item} onChange={this.handleChange}/>
+        <input type="text" className="form-control" id="price" name="price" value={this.state.price} onChange={this.handleChange}/>
         <label htmlFor="description">Description</label>
-        <textarea rows='3' type="text" className="form-control" id="body" name="body" value={this.state.body} onChange={this.handleChange}/>
+        <textarea rows='3' type="text" className="form-control" id="description" name="description" value={this.state.description} onChange={this.handleChange}/>
         <label htmlFor="image">Add Image</label>
         <input type="file" id="image" name="image" onChange={this.handleImage}/>
         <img className="image-preview" src={this.state.preview} alt=''/>

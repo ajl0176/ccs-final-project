@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     #Local
     'api.apps.ApiConfig',
     'accounts.apps.AccountsConfig',
+    'events.apps.EventsConfig',
     'frontend.apps.FrontendConfig',
     'menu.apps.MenuConfig',
 

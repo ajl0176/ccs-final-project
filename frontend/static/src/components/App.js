@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { Switch,Route, Link, withRouter } from "react-router-dom";
 import Home from './Home';
 import Menu from './Menu';
+import MenuForm from './MenuForm';
 import Location from './Location';
+import Calendar from './Calendar';
+import CalendarList from './CalendarList';
 import MenuList from './MenuList';
 import OrderForm from './OrderForm';
 import LoginForm from './LoginForm';
@@ -61,7 +64,8 @@ class App extends Component {
     const data = await response.json().catch(handleError);
 
     Cookies.set('Authorization', `Token ${data.key}`);
-    this.setState({isAuth: true}, () =>this.props.history.push('/location'));
+    this.setState({isAuth: true});
+    this.props.history.push('/menuform');
   }
 
 
@@ -93,6 +97,7 @@ class App extends Component {
       <React.Fragment>
       <Nav handleLogout={this.handleLogout} isAuth={this.state.isAuth} />
           <Switch>
+            <Route path='/menuform' component={MenuForm} />
             <Route path='/menu' component={Menu} />
             <Route path='/location' component={Location} />
             <Route path='/login' render={(props) => <LoginForm isAuth={this.state.isAuth} handleLogin={this.handleLogin} />}/>

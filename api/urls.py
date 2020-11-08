@@ -5,4 +5,5 @@ app_name = "api"
 
 urlpatterns = [
     path('menuitems/', include('menu.urls')),
+    path('events/', include('events.urls')),
 ]

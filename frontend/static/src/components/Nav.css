@@ -1,0 +1,16 @@
+.navbar {
+  height: 60px;
+}
+
+
+li {
+  float: left;
+  display: lock;
+  color: white;
+  text-align: center;
+  padding: 16px;
+}
+
+.nav-link {
+  text-decoration: none;
+}

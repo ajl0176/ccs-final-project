@@ -65,3 +65,34 @@ class SimpleMap extends Component {
 }
 
 export default SimpleMap;
+
+// class Calendar extends Component {
+//
+//   constructor(props) {
+//     super(props);
+//
+//     this.state = {
+//       events: [],
+//     };
+//   }
+//
+//   componentDidMount() {
+//
+//     fetch('/api/v1/events/')
+//       .then(response => response.json())
+//       .then(data => this.setState({events: data}))
+//       .then(error=> console.log('Error', error));
+//   }
+//
+//   render(){
+//     return (
+//       <React.Fragment>
+//         <div className="row">
+//         <CalendarList events={this.state.events} />
+//         </div>
+//       </React.Fragment>
+//     );
+//   }
+// }
+//
+// export default Calendar;
