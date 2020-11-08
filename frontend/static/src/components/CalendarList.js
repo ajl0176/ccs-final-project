@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 
-
 class EventItem extends Component  {
 
   constructor(props){
@@ -18,7 +17,7 @@ class EventItem extends Component  {
             <div className="list-group-item list-group-item-action">
               <div className="row ">
                 <h5 className="col-10 ">{this.props.item.day}</h5>
-                <h5 className="col-2">${this.props.item.location}</h5>
+                <h5 className="col-2">{this.props.item.location}</h5>
               </div>
             </div>
           </ul>

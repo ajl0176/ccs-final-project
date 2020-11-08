@@ -78,9 +78,10 @@ render(){
         <input type="text" className="form-control" id="price" name="price" value={this.state.price} onChange={this.handleChange}/>
         <label htmlFor="description">Description</label>
         <textarea rows='3' type="text" className="form-control" id="description" name="description" value={this.state.description} onChange={this.handleChange}/>
-        <label htmlFor="image">Add Image</label>
+        <label htmlFor="image">Image</label>
         <input type="file" id="image" name="image" onChange={this.handleImage}/>
         <img className="image-preview" src={this.state.preview} alt=''/>
+
       </div>
       <button type="submit" className="btn btn-primary">Add Item</button>
     </form>

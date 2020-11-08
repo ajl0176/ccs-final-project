@@ -4,7 +4,6 @@ import Home from './Home';
 import Menu from './Menu';
 import MenuForm from './MenuForm';
 import Location from './Location';
-import Calendar from './Calendar';
 import CalendarList from './CalendarList';
 import MenuList from './MenuList';
 import OrderForm from './OrderForm';
