@@ -12,5 +12,5 @@ class Menuitem(models.Model):
     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
 
 
-    def __str__(entree):
+    def __str__(self):
         return self.entree

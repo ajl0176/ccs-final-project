@@ -3,8 +3,10 @@ import CalendarList from './CalendarList';
 import GoogleMapReact from 'google-map-react';
 import Location from './Location';
 import './Location.css';
+import './map.css';
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
+
 class SimpleMap extends Component {
 
   constructor(props) {
@@ -25,24 +27,22 @@ class SimpleMap extends Component {
 
   static defaultProps = {
     center: {
-      lat: 59.95,
-      lng: 30.33
+      lat: 34.6738,
+      lng: -82.8369
     },
     zoom: 11
   };
   render() {
+    console.log(this.props.center)
     return (
       // Important! Always set the container height explicitly
 
     <div className="container">
       <div className="row">
-        <div className="col-location">
-          <h1 className ="category-header-weekly">Where's OOTG</h1>
-            <div classname="list-group-weekly">
+        <div className="col-location col-8">
             <CalendarList events={this.state.events} />
-            </div>
         </div>
-        <div className="col-map">
+        <div className="col-map col-4">
             <div style={{ height: '50vh', width: '600px' }}>
               <GoogleMapReact
                 bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY}}
@@ -50,8 +50,8 @@ class SimpleMap extends Component {
                 defaultZoom={this.props.zoom}
               >
               <AnyReactComponent
-                lat={59.955413}
-                lng={30.337844}
+                lat={34.6738}
+                lng={-82.8369}
                 text="My Marker"
               />
             </GoogleMapReact>

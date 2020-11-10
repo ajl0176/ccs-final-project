@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Calendar.css';
 
 
 class EventItem extends Component  {
@@ -11,18 +12,20 @@ class EventItem extends Component  {
 
   render(){
     return (
-      <main className="event-wrapper">
+
         <div className="container">
-          <ul className="menu-list">
-            <div className="list-group-item list-group-item-action">
+          <ul className="address-list">
+            <div className="list-group-item">
               <div className="row ">
-                <h5 className="col-10 ">{this.props.item.day}</h5>
-                <h5 className="col-2">{this.props.item.location}</h5>
+                <h5 className="col-2 ">{this.props.item.day}</h5>
+                <div class="d-flex justify-content-center flex-fill bd-hightlight align-items-center">
+                <h5 className="col-10">{this.props.item.location}</h5>
+                </div>
               </div>
             </div>
           </ul>
         </div>
-    </main>
+
 
     );
   }
@@ -36,10 +39,9 @@ class CalendarList extends Component {
     return(
 
       <div className="col">
-        <div className="col-12">
         <h2 className="locations">Weekly Location</h2>
       {events}
-      </div>
+
       </div>
     )
   }

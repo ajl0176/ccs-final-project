@@ -1,11 +1,11 @@
 .container {
-margin-left: 50px;
+margin-left: 10px;
 }
 
 .location-text{
   display: flex;
   vertical-align: middle;
-  float: right;
+
 }
 
 .col-location {
@@ -14,4 +14,8 @@ margin-left: 50px;
 
 h1 {
   width:600px;
+}
+
+.col-map {
+  top: 45px;
 }

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 
 
-class Home extends Component {
+class Contact extends Component {
 constructor(props) {
   super(props);
   this.state={
@@ -13,7 +13,8 @@ constructor(props) {
     return(
       <section>
         <div className="col">
-        <h1>Welcome to OOTG</h1>
+        <h3> EMAIL: Organiconthego1@gmail.com</h3>
+        <h3> PHONE: 864-616-1151 </h3>
         </div>
       </section>
 
@@ -21,4 +22,4 @@ constructor(props) {
   }
 }
 
-export default Home;
+export default Contact;

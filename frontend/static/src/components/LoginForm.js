@@ -21,7 +21,7 @@ class LoginForm extends Component{
       <React.Fragment>
       <form className="col-12 col-md-6 log-in" onSubmit={(event) => this.props.handleLogin(event, this.state)}>
         <h5 className="Register">Log in</h5>
-        <div className="form-group">
+        <div className="form-group mt-5">
           <label htmlFor="username">Username</label>
           <input type='text' className="form-control" id="username" name="username" value={this.state.username} onChange={this.handleChange}/>
         </div>
@@ -30,7 +30,7 @@ class LoginForm extends Component{
           <input type='password' className="form-control" id="password" name="password" value={this.state.password} onChange={this.handleChange}/>
         </div>
         <div className="create-Account-Btn">
-          <button type="submit" className="btn btn-primary">Log In</button>
+          <button type="submit" className="btn btn-dark">Log In</button>
         <div>
           <Link to="/Registration">Don't have an account?</Link>
         </div>

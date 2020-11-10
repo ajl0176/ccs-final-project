@@ -14,7 +14,7 @@ class OrderForm extends Component {
 
     render() {
       const subtotal = this.props.order.reduce((acc, item)=> {
-      let total = acc + item.price
+      let total = acc + Number(item.price)
           return total
       }, 0);
 

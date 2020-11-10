@@ -12,9 +12,12 @@ class MenuForm extends Component {
       price: '',
       description: '',
       image: null,
+      is_active: false,
+
     }
     this.handleChange = this.handleChange.bind(this);
     this.addItem = this.addItem.bind(this);
+    this.handleImage = this.handleImage.bind(this);
   }
 
   handleChange (event){
@@ -52,6 +55,7 @@ class MenuForm extends Component {
     formData.append('price', this.state.price);
     formData.append('description', this.state.description);
     formData.append('image', this.state.image);
+    formData.append('is_active', this.state.is_active);
     console.log(formData);
     const options = {
        method: 'POST',
@@ -70,17 +74,20 @@ class MenuForm extends Component {
 render(){
   return(
   <React.Fragment>
-    <form className="col-12 col-md-6 form" onSubmit={(e) => this.addItem(e)}>
+    <form className="col-12 col-md-6 form" onSubmit={(e) => this.addItem(e, this.state)}>
       <div className="form group" >
-        <label htmlFor="Entree">Entree</label>
+        <label htmlFor="entree">Entree</label>
         <input type="text" className="form-control" id="entree" name="entree" value={this.state.entree} onChange={this.handleChange}/>
         <label htmlFor="price">Price</label>
         <input type="text" className="form-control" id="price" name="price" value={this.state.price} onChange={this.handleChange}/>
         <label htmlFor="description">Description</label>
         <textarea rows='3' type="text" className="form-control" id="description" name="description" value={this.state.description} onChange={this.handleChange}/>
         <label htmlFor="image">Image</label>
-        <input type="file" id="image" name="image" onChange={this.handleImage}/>
-        <img className="image-preview" src={this.state.preview} alt=''/>
+        <input type="file" id="image" name="image"  onChange={this.handleImage}/>
+        <img src={this.state.preview} alt=''/>
+        <label htmlFor="is_active">Is Active</label>
+        <input type="checkbox" checked={this.state.is_active} onChange={()=>this.setState(prevState =>({is_active: !prevState.is_active}))} />
+
 
       </div>
       <button type="submit" className="btn btn-primary">Add Item</button>

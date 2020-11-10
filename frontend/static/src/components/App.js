@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import { Switch,Route, Link, withRouter } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './Home';
 import Menu from './Menu';
 import MenuForm from './MenuForm';
 import Location from './Location';
-import CalendarList from './CalendarList';
-import MenuList from './MenuList';
-import OrderForm from './OrderForm';
+import Contact from './Contact';
+// import CalendarForm from './CalendarForm';
+// import CalendarList from './CalendarList';
+// import MenuList from './MenuList';
+// import OrderForm from './OrderForm';
 import LoginForm from './LoginForm';
 import Registration from './Registration';
 import Nav from './Nav';
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie';
+// import Footer from './Footer';
 
 class App extends Component {
   constructor(props) {
@@ -102,7 +106,10 @@ class App extends Component {
             <Route path='/login' render={(props) => <LoginForm isAuth={this.state.isAuth} handleLogin={this.handleLogin} />}/>
             <Route path='/registration' render={(props) => <Registration isAuth={this.state.isAuth} handleRegistration={this.handleRegistration} />}/>
             <Route path='/' component={Home} exact />
+            <Route path='/contact' component={Contact} />
          </Switch>
+
+
         </React.Fragment>
     );
   }

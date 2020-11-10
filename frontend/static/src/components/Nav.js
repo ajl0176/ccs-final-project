@@ -5,33 +5,35 @@ import './Nav.css';
 function Nav(props) {
   return(
     <React.Fragment>
-    <nav className="navbar">
-    <ul className="navbar-nav mr-auto">
-      <li><Link to={'/home'} className="nav-link">Home</Link></li>
-      {props.isAuth
-      ?
-      <li><Link to ={'/menuform'} className="nav-link">Menu Form</Link></li>
-      :
-      <li><Link to={'/menu'} className="nav-link">Menu</Link></li>
-    }
-      <li><Link to={'/location'} className="nav-link">Location</Link></li>
-      {props.isAuth
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <ul className="navbar-nav mr-auto">
+        <li><Link to={'/home'} className="nav-link">Home</Link></li>
+        {props.isAuth
         ?
-        <button className="navbar-buttons mr-2" onClick={props.handleLogout}>Log out</button>
+        <li><Link to ={'/menuform'} className="nav-link">Menu Form</Link></li>
+        :
+        <li><Link to={'/menu'} className="nav-link">Menu</Link></li>
+        }
+        {props.isAuth
+        ?
+        <li><Link to={'/calendarform'} className="nav-link">Calendar Form</Link></li>
+        :
+        <li><Link to={'/location'} className="nav-link">Location</Link></li>
+        }
+        <li><Link to ={'/contact'} className="nav-link">Contact</Link></li>
+        {props.isAuth
+        ?
+        <button type="button" className="btn btn-secondary btn-lg" onClick={props.handleLogout}>Log out</button>
         :
         <li><Link to={'/login'} className="nav-link">Log-In</Link></li>
-      }
-
-
-
-    </ul>
+        }
+      </ul>
     </nav>
     <div>
       <hr />
     </div>
 
     </React.Fragment>
-
   )
 }
 

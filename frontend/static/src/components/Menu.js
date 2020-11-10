@@ -3,6 +3,7 @@ import MenuList from './MenuList';
 import OrderForm from './OrderForm';
 
 
+
 class Menu extends Component {
 
   constructor(props) {
@@ -11,7 +12,7 @@ class Menu extends Component {
     this.state = {
       menuItems: [],
       order: [],
-      subtotal: 0
+      subtotal: 0,
     };
 
     this.addOrder = this.addOrder.bind(this);
@@ -49,11 +50,16 @@ class Menu extends Component {
   render(){
     return (
       <React.Fragment>
-        <div className="row">
-        <MenuList menuItems={this.state.menuItems} addOrder={this.addOrder} />
-        <OrderForm order={this.state.order} deleteOrder={this.deleteOrder} submitOrder={this.submitOrder}/>
 
+        <div className="row">
+          <div className="col-7">
+            <MenuList menuItems={this.state.menuItems} addOrder={this.addOrder} />
+          </div>
+          <div className="col-5">
+            <OrderForm order={this.state.order} deleteOrder={this.deleteOrder} submitOrder={this.submitOrder}/>
+          </div>
         </div>
+
       </React.Fragment>
     );
   }
