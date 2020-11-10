@@ -31,16 +31,42 @@ class FoodItem extends Component  {
   }
 }
 
+
 class MenuList extends Component {
 
   render() {
     const menuitems = this.props.menuItems.map((item)=> <FoodItem  addOrder={this.props.addOrder} deleteOrder={this.props.deleteOrder} subtotal={this.props.subtotal} item={item}/>);
 
+    let categories = this.props.addOns?.map((addon, index) => addon.category);
+    console.log(categories);
+    // The Set object lets you store unique values of any type
+    // A value in the Set may only occur once
+    categories = [...new Set(categories)];
+
+    const addOns = categories.map(category => {
+      // console.log('single', category)
+      const items = this.props.addOns
+        .filter(addOn => addOn.category === category)
+        .map(addOn => <p>{addOn.item}{addOn.price}</p>);
+      // console.log('items', items);
+      return(
+        <React.Fragment>
+          <h2>{category}</h2>
+          {items}
+        </React.Fragment>
+      )}
+    );
+
+
+
     return(
 
       <div className="col">
         <h2 className="foodCategory">Menu</h2>
-      {menuitems}
+        {menuitems}
+
+      <h2 className="foodCategory">Make Your Own!</h2>
+        {addOns}
       </div>
     )
   }

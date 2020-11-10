@@ -11,6 +11,7 @@ class Menu extends Component {
 
     this.state = {
       menuItems: [],
+      addOns: [],
       order: [],
       subtotal: 0,
     };
@@ -18,6 +19,8 @@ class Menu extends Component {
     this.addOrder = this.addOrder.bind(this);
     this.deleteOrder = this.deleteOrder.bind(this);
     this.submitOrder = this.submitOrder.bind(this);
+    this.fetchMenuItems = this.fetchMenuItems.bind(this);
+    this.fetchAddOns = this.fetchAddOns.bind(this);
   }
 
   addOrder(item) {
@@ -39,13 +42,27 @@ class Menu extends Component {
     this.setState({order: []});
   }
 
-  componentDidMount() {
-
+  fetchMenuItems() {
     fetch('/api/v1/menuitems/')
       .then(response => response.json())
       .then(data => this.setState({menuItems: data}))
       .then(error=> console.log('Error', error));
+
   }
+
+  fetchAddOns() {
+    fetch('/api/v1/menuitems/addons/')
+      .then(response => response.json())
+      .then(data => this.setState({addOns: data}))
+      .then(error=> console.log('Error', error));
+  }
+
+  componentDidMount() {
+    this.fetchMenuItems();
+    this.fetchAddOns();
+  }
+
+
 
   render(){
     return (
@@ -53,7 +70,7 @@ class Menu extends Component {
 
         <div className="row">
           <div className="col-7">
-            <MenuList menuItems={this.state.menuItems} addOrder={this.addOrder} />
+            <MenuList menuItems={this.state.menuItems} addOns={this.state.addOns} addOrder={this.addOrder} />
           </div>
           <div className="col-5">
             <OrderForm order={this.state.order} deleteOrder={this.deleteOrder} submitOrder={this.submitOrder}/>

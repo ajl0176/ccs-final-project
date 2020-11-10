@@ -18,6 +18,7 @@ class MenuForm extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.addItem = this.addItem.bind(this);
     this.handleImage = this.handleImage.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
   }
 
   handleChange (event){
@@ -69,6 +70,22 @@ class MenuForm extends Component {
     .then(data => console.log(data))
 
 };
+
+async deleteItem(e, id) {
+  e.preventDefault();
+
+  const options = {
+    method: 'DELETE',
+    headers: {
+      'X-CSRFToken': Cookies.get('csrftoken'),
+            'Content-Type': 'application/json'
+      },
+    };
+    const handleError = (err) => console.warn(err);
+    const response = await fetch (`/api/v1/menuitems/${id}`, options)
+    const data = await response.json().catch(handleError)
+    await console.log(data);
+  }
 
 
 render(){

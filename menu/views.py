@@ -2,8 +2,8 @@ from django.shortcuts import render
 
 from rest_framework import generics, permissions
 
-from .models import Menuitem
-from .serializers import MenuSerializer
+from .models import Menuitem, AddOn
+from .serializers import MenuSerializer, AddOnSerializer
 
 
 
@@ -19,3 +19,16 @@ class AdminMenuitemListCreateView (generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(user = self.request.user)
+
+class AdminMenuitemDetailView (generics.RetrieveUpdateDestroyAPIView):
+    queryset = Menuitem.objects.all()
+    serializer_class = MenuSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+    def perform_create(self, serializer):
+        serializer.save(user = self.request.user)
+
+class AddOnListAPIView (generics.ListAPIView):
+    queryset = AddOn.objects.filter(is_active=True)
+    serializer_class = AddOnSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
