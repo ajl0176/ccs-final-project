@@ -5,7 +5,12 @@ from accounts.models import User
 class AddOn(models.Model):
     item = models.CharField(max_length = 255)
     price = models.CharField(max_length = 255)
-    category = models.CharField(max_length=255, default="")
+    addons= (
+                    ('Protein', 'Protein'),
+                    ('Veggies', 'Veggies'),
+                    ('High Carbs', 'High Carbs')
+    )
+    category =  models.CharField(max_length=255, blank=True, choices=addons)
     is_active = models.BooleanField(default=False)
 
 

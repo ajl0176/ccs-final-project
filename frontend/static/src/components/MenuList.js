@@ -33,6 +33,11 @@ class FoodItem extends Component  {
 
 
 class MenuList extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+    }
+  }
 
   render() {
     const menuitems = this.props.menuItems.map((item)=> <FoodItem  addOrder={this.props.addOrder} deleteOrder={this.props.deleteOrder} subtotal={this.props.subtotal} item={item}/>);
@@ -47,27 +52,49 @@ class MenuList extends Component {
       // console.log('single', category)
       const items = this.props.addOns
         .filter(addOn => addOn.category === category)
-        .map(addOn => <p>{addOn.item}{addOn.price}</p>);
+        .map(addOn => (<p>{addOn.item} </p>));
+
+      const prices = this.props.addOns
+      .filter(addOn => addOn.category === category)
+      .map(addOn => (<p>${addOn.price} </p>));
+
+
+
+    // const addOns = this.props.addOns.map(item)=>
       // console.log('items', items);
       return(
         <React.Fragment>
-          <h2>{category}</h2>
-          {items}
+
+          <div className="container">
+            <div className="row">
+              <div className= "col-12">
+                <h2>{category}</h2>
+                <div className="row">
+                <p className="col-10 ">{items}</p>
+                <p clasName="col-2">{prices}</p>
+
+                </div>
+                </div>
+              </div>
+            </div>
+
         </React.Fragment>
       )}
+
     );
 
-
-
     return(
-
-      <div className="col">
-        <h2 className="foodCategory">Menu</h2>
-        {menuitems}
-
-      <h2 className="foodCategory">Make Your Own!</h2>
+      <React.Fragment>
+        <div className="col">
+          <h2 className="foodCategory">Menu</h2>
+          {menuitems}
+       </div>
+       <h2 className="foodCategory">Make Your Own!</h2>
+       <div className="addons">
         {addOns}
       </div>
+
+    </React.Fragment>
     )
   }
 }

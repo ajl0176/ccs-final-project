@@ -1,3 +1,9 @@
 .foodCategory {
   text-align: center;
 }
+
+.addons {
+   display:flex;
+   justify-content: space-around;
+   margin-left: 62px;
+}
