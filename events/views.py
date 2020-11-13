@@ -17,5 +17,7 @@ class AdminEventListCreateView (generics.ListCreateAPIView):
     serializer_class = EventsSerializer
     permission_classes = (permissions.IsAdminUser,)
 
-    def perform_create(self, serializer):
-        serializer.save(user = self.request.user)
+class EventDetailView (generics.RetrieveUpdateDestroyAPIView):
+    queryset = Event.objects.all()
+    serializer_class = EventsSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)

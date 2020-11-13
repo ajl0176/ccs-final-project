@@ -1,9 +1,16 @@
 .foodCategory {
   text-align: center;
+  color: red;
 }
 
 .addons {
    display:flex;
    justify-content: space-around;
    margin-left: 62px;
+   ;
+}
+
+img {
+  width: 500px;
+  height: 200px;
 }

@@ -17,8 +17,6 @@ class AdminMenuitemListCreateView (generics.ListCreateAPIView):
     serializer_class = MenuSerializer
     permission_classes = (permissions.IsAdminUser,)
 
-    def perform_create(self, serializer):
-        serializer.save(user = self.request.user)
 
 class AdminMenuitemDetailView (generics.RetrieveUpdateDestroyAPIView):
     queryset = Menuitem.objects.all()

@@ -20,7 +20,7 @@ class FoodItem extends Component  {
                 <h5 className="col-2">${this.props.item.price}</h5>
               </div>
                 <p className="col-md-auto mb-1"> {this.props.item.description}</p>
-                <img src={this.props.item.image}/>
+                <img src={this.props.item.image} alt=""/>
                 <button type="button" className="btn btn-sm btn-light" onClick={()=>this.props.addOrder(this.props.item)}>Add to Order</button>
           <hr/>
           </ul>
@@ -29,21 +29,45 @@ class FoodItem extends Component  {
 
     );
   }
+
 }
+
 
 
 class MenuList extends Component {
   constructor(props){
     super(props);
     this.state = {
+      createYourOwn: [],
     }
+
+    this.addToCreateYourOwn = this.addToCreateYourOwn.bind(this);
+    this.addAddOnToOrder = this.addAddOnToOrder.bind(this);
+  }
+
+  addToCreateYourOwn(item) {
+    // console.log(item);
+    const createYourOwn = [...this.state.createYourOwn];
+    createYourOwn.push(item);
+    this.setState({createYourOwn});
+  }
+
+  addAddOnToOrder() {
+    // entree is 'Add on'
+    // price
+
+    const price = this.state.createYourOwn.reduce((acc, i) => acc + Number(i.price), 0);
+    const entree = this.state.createYourOwn.reduce((acc, i) => acc + i.item, "Add on: ");
+    this.props.addOrder({entree, price})
+
+    console.log(entree, price);
   }
 
   render() {
-    const menuitems = this.props.menuItems.map((item)=> <FoodItem  addOrder={this.props.addOrder} deleteOrder={this.props.deleteOrder} subtotal={this.props.subtotal} item={item}/>);
+    const menuitems = this.props.menuItems.map((item)=> <FoodItem key={item.id} addOrder={this.props.addOrder} deleteOrder={this.props.deleteOrder} deleteItem={this.props.deleteItem} subtotal={this.props.subtotal} item={item}/>);
 
     let categories = this.props.addOns?.map((addon, index) => addon.category);
-    console.log(categories);
+    // console.log(categories);
     // The Set object lets you store unique values of any type
     // A value in the Set may only occur once
     categories = [...new Set(categories)];
@@ -52,13 +76,13 @@ class MenuList extends Component {
       // console.log('single', category)
       const items = this.props.addOns
         .filter(addOn => addOn.category === category)
-        .map(addOn => (<p>{addOn.item} </p>));
+        .map(addOn => (<p key={addOn.id} onClick={() => this.addToCreateYourOwn(addOn)}>{addOn.item} </p>));
 
       const prices = this.props.addOns
       .filter(addOn => addOn.category === category)
-      .map(addOn => (<p>${addOn.price} </p>));
+      .map(addOn => (<p key={addOn.id}>${addOn.price} </p>));
 
-
+      // addOrder={this.props.addOrder}
 
     // const addOns = this.props.addOns.map(item)=>
       // console.log('items', items);
@@ -70,8 +94,8 @@ class MenuList extends Component {
               <div className= "col-12">
                 <h2>{category}</h2>
                 <div className="row">
-                <p className="col-10 ">{items}</p>
-                <p clasName="col-2">{prices}</p>
+                <h5 className="col-10 ">{items}</h5>
+                <h5 className="col-2">{prices}</h5>
 
                 </div>
                 </div>
@@ -93,6 +117,9 @@ class MenuList extends Component {
        <div className="addons">
         {addOns}
       </div>
+      <div>
+        <button type="button" onClick={this.addAddOnToOrder}>Add to Order</button>
+        </div>
 
     </React.Fragment>
     )

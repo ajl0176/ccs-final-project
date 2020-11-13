@@ -18,7 +18,7 @@ class EventItem extends Component  {
             <div className="list-group-item">
               <div className="row ">
                 <h5 className="col-2 ">{this.props.item.day}</h5>
-                <div class="d-flex justify-content-center flex-fill bd-hightlight align-items-center">
+                <div className="d-flex justify-content-center flex-fill bd-hightlight align-items-center">
                 <h5 className="col-10">{this.props.item.location}</h5>
                 </div>
               </div>

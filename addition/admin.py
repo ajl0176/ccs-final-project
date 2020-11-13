@@ -3,4 +3,4 @@ from .models import AddOn
 
 
 
-# admin.site.register(AddOn)
+admin.site.register(AddOn)

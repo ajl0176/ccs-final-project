@@ -27,6 +27,7 @@ function Nav(props) {
         :
         <li><Link to={'/login'} className="nav-link">Log-In</Link></li>
         }
+        <li><Link to={'/editmenu'} className="nav-link">Edit Menu</Link></li>
       </ul>
     </nav>
     <div>

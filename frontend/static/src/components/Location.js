@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import CalendarList from './CalendarList';
 import GoogleMapReact from 'google-map-react';
-import Location from './Location';
 import './Location.css';
 import './map.css';
 

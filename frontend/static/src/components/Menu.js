@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import MenuList from './MenuList';
 import OrderForm from './OrderForm';
+import Cookies from 'js-cookie';
 
 
 
@@ -21,6 +22,7 @@ class Menu extends Component {
     this.submitOrder = this.submitOrder.bind(this);
     this.fetchMenuItems = this.fetchMenuItems.bind(this);
     this.fetchAddOns = this.fetchAddOns.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
   }
 
   addOrder(item) {
@@ -57,6 +59,21 @@ class Menu extends Component {
       .then(error=> console.log('Error', error));
   }
 
+  async deleteItem(e) {
+    // e.preventDefault();
+
+    const options = {
+      method: 'DELETE',
+      headers: {
+        'X-CSRFToken': Cookies.get('csrftoken'),
+        },
+      };
+      const handleError = (err) => console.warn(err);
+      const response =  await fetch (`/api/v1/menuitems/${this.state.menuitems}`, options)
+      const data = await response.json().catch(handleError)
+      console.log(data);
+    }
+
   componentDidMount() {
     this.fetchMenuItems();
     this.fetchAddOns();
@@ -71,6 +88,7 @@ class Menu extends Component {
         <div className="row">
           <div className="col-7">
             <MenuList menuItems={this.state.menuItems} addOns={this.state.addOns} addOrder={this.addOrder} />
+
           </div>
           <div className="col-5">
             <OrderForm order={this.state.order} deleteOrder={this.deleteOrder} submitOrder={this.submitOrder}/>

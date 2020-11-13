@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { Switch,Route, Link, withRouter } from "react-router-dom";
+import { Switch,Route, withRouter } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './Home';
 import Menu from './Menu';
 import MenuForm from './MenuForm';
 import Location from './Location';
 import Contact from './Contact';
-// import CalendarForm from './CalendarForm';
+import EditMenu from './EditMenu';
+import CalendarForm from './CalendarForm';
 // import CalendarList from './CalendarList';
 // import MenuList from './MenuList';
 // import OrderForm from './OrderForm';
@@ -26,6 +27,7 @@ class App extends Component {
     this.handleLogin = this.handleLogin.bind(this);
     this.handleRegistration = this.handleRegistration.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
+    // this.deleteEvent = this.deleteEvent.bind(this);
 
   }
 
@@ -92,21 +94,31 @@ class App extends Component {
       }
      }
 
+     // deleteEvent(){
+     //   fetch(`/api/v1/menuItems/${this.props.menuItemID}/`, {
+     //     method: 'DELETE',
+     //   })
+     //   .catch((error)=> console.error('Error:', error));
+     // }
+
 
 
   render() {
-    const isAuth = this.state.isAuth;
+
     return (
       <React.Fragment>
       <Nav handleLogout={this.handleLogout} isAuth={this.state.isAuth} />
           <Switch>
             <Route path='/menuform' component={MenuForm} />
+              
             <Route path='/menu' component={Menu} />
             <Route path='/location' component={Location} />
             <Route path='/login' render={(props) => <LoginForm isAuth={this.state.isAuth} handleLogin={this.handleLogin} />}/>
             <Route path='/registration' render={(props) => <Registration isAuth={this.state.isAuth} handleRegistration={this.handleRegistration} />}/>
             <Route path='/' component={Home} exact />
             <Route path='/contact' component={Contact} />
+            <Route path='/editmenu' component={EditMenu} />
+            <Route path='/calendarform' component={CalendarForm}/>
          </Switch>
 
 

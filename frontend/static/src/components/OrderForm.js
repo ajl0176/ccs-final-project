@@ -32,15 +32,23 @@ class OrderForm extends Component {
                 <h2 className="main-title">Order Form</h2>
               </div>
               <hr/>
-
+              <div className="Information">
+              <label htmlFor="name">Name</label>
+              <input type="text" className="form-control" id="name" name="name" value={this.state.name} onChange={this.handleChange}/>
+              <label htmlFor="email">Email</label>
+              <input type="text" className="form-control" id="email" name="email" value={this.state.email} onChange={this.handleChange}/>
+              <label htmlFor="email">Phone</label>
+              <input type="text" className="form-control" id="phone" name="phone" value={this.state.phone} onChange={this.handleChange}/>
+              </div>
+              <br />
             <div className="row justify-content-between">
                 <div className="col-12">{orderList}
-                <hr class="solid"/>
+                <hr className="solid"/>
                 </div>
               </div>
 
             <div className="row justify-content-center">
-              <div classname="col-6">
+              <div className="col-6">
                   <div className="subtotal">
                       <h4>Total: ${subtotal}</h4>
 
