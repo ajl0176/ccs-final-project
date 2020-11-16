@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import MenuList from './MenuList';
 import OrderForm from './OrderForm';
 import Cookies from 'js-cookie';
+import TestForm from './TestForm';
 
 
 
@@ -19,7 +20,7 @@ class Menu extends Component {
 
     this.addOrder = this.addOrder.bind(this);
     this.deleteOrder = this.deleteOrder.bind(this);
-    this.submitOrder = this.submitOrder.bind(this);
+    this.checkOut = this.checkOut.bind(this);
     this.fetchMenuItems = this.fetchMenuItems.bind(this);
     this.fetchAddOns = this.fetchAddOns.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
@@ -31,6 +32,7 @@ class Menu extends Component {
     this.setState({order, order});
   }
 
+
   deleteOrder(item){
     console.log(item);
     const order = [...this.state.order];
@@ -39,7 +41,7 @@ class Menu extends Component {
     this.setState({order, order});
   }
 
-  submitOrder() {
+  checkOut() {
     alert("Your order was submitted!");
     this.setState({order: []});
   }
@@ -91,7 +93,8 @@ class Menu extends Component {
 
           </div>
           <div className="col-5">
-            <OrderForm order={this.state.order} deleteOrder={this.deleteOrder} submitOrder={this.submitOrder}/>
+            <OrderForm order={this.state.order} deleteOrder={this.deleteOrder} checkOut={this.checkOut}/>
+
           </div>
         </div>
 

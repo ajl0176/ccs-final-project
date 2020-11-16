@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './Home';
 import Menu from './Menu';
 import MenuForm from './MenuForm';
-import Location from './Location';
+import Map from './Map';
 import Contact from './Contact';
 import EditMenu from './EditMenu';
 import CalendarForm from './CalendarForm';
@@ -13,9 +13,12 @@ import CalendarForm from './CalendarForm';
 // import OrderForm from './OrderForm';
 import LoginForm from './LoginForm';
 import Registration from './Registration';
+import TestForm from './TestForm';
+import MapAutoComplete from './MapAutoComplete';
+import MapAddMarker from './MapAddMarker';
 import Nav from './Nav';
 import Cookies from 'js-cookie';
-// import Footer from './Footer';
+
 
 class App extends Component {
   constructor(props) {
@@ -27,7 +30,7 @@ class App extends Component {
     this.handleLogin = this.handleLogin.bind(this);
     this.handleRegistration = this.handleRegistration.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
-    // this.deleteEvent = this.deleteEvent.bind(this);
+    this.deleteEvent = this.deleteEvent.bind(this);
 
   }
 
@@ -94,12 +97,12 @@ class App extends Component {
       }
      }
 
-     // deleteEvent(){
-     //   fetch(`/api/v1/menuItems/${this.props.menuItemID}/`, {
-     //     method: 'DELETE',
-     //   })
-     //   .catch((error)=> console.error('Error:', error));
-     // }
+     deleteEvent(){
+       fetch(`/api/v1/menuItems/${this.props.menuItemID}/`, {
+         method: 'DELETE',
+       })
+       .catch((error)=> console.error('Error:', error));
+     }
 
 
 
@@ -109,21 +112,22 @@ class App extends Component {
       <React.Fragment>
       <Nav handleLogout={this.handleLogout} isAuth={this.state.isAuth} />
           <Switch>
-            <Route path='/menuform' component={MenuForm} />
-              
+            <Route path='/menuform' component={MenuForm}/>
             <Route path='/menu' component={Menu} />
-            <Route path='/location' component={Location} />
+            <Route path='/map' component={Map} />
             <Route path='/login' render={(props) => <LoginForm isAuth={this.state.isAuth} handleLogin={this.handleLogin} />}/>
             <Route path='/registration' render={(props) => <Registration isAuth={this.state.isAuth} handleRegistration={this.handleRegistration} />}/>
             <Route path='/' component={Home} exact />
+            <Route path='/home' component={Home} />
             <Route path='/contact' component={Contact} />
             <Route path='/editmenu' component={EditMenu} />
-            <Route path='/calendarform' component={CalendarForm}/>
+            <Route path='/calendarform' component={CalendarForm} />
+            <Route path='/testform' component={TestForm} />
          </Switch>
-
 
         </React.Fragment>
     );
+
   }
 }
 

@@ -18,7 +18,6 @@ class MenuForm extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.addItem = this.addItem.bind(this);
     this.handleImage = this.handleImage.bind(this);
-
   }
 
   handleChange (event){
@@ -69,10 +68,7 @@ class MenuForm extends Component {
     .then(response => response.json())
     .then(data => console.log(data))
 
-};
-
-
-
+}
 
 render(){
   return(
@@ -90,8 +86,6 @@ render(){
         <img src={this.state.preview} alt=''/>
         <label htmlFor="is_active">Is Active</label>
         <input type="checkbox" checked={this.state.is_active} onChange={()=>this.setState(prevState =>({is_active: !prevState.is_active}))} />
-
-
       </div>
       <button type="submit" className="btn btn-primary">Add Item</button>
     </form>

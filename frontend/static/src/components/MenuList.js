@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Col, Row, Form, FormGroup, Input, Label, Button, CustomInput } from 'reactstrap';
 import './Menu.css';
 
 class FoodItem extends Component  {
@@ -14,7 +15,6 @@ class FoodItem extends Component  {
       <main className="menu-wrapper">
         <div className="container">
           <ul className="menu-list">
-
               <div className="row ">
                 <h5 className="col-10 ">{this.props.item.entree}</h5>
                 <h5 className="col-2">${this.props.item.price}</h5>
@@ -93,10 +93,11 @@ class MenuList extends Component {
             <div className="row">
               <div className= "col-12">
                 <h2>{category}</h2>
+                <div className="col">
                 <div className="row">
-                <h5 className="col-10 ">{items}</h5>
-                <h5 className="col-2">{prices}</h5>
-
+                <h5 className=" btn" role="button" aria-pressed="True">{items}</h5>
+                <h5 className="btn">{prices}</h5>
+                </div>
                 </div>
                 </div>
               </div>
@@ -114,11 +115,12 @@ class MenuList extends Component {
           {menuitems}
        </div>
        <h2 className="foodCategory">Make Your Own!</h2>
-       <div className="addons">
+       <div className="addOns">
         {addOns}
       </div>
+<button type="button-addons" onClick={this.addAddOnToOrder}>Add to Order</button>
       <div>
-        <button type="button" onClick={this.addAddOnToOrder}>Add to Order</button>
+
         </div>
 
     </React.Fragment>

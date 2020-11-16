@@ -1,9 +1,9 @@
 .foodCategory {
   text-align: center;
-  color: red;
+
 }
 
-.addons {
+.addOns {
    display:flex;
    justify-content: space-around;
    margin-left: 62px;
@@ -11,6 +11,17 @@
 }
 
 img {
-  width: 500px;
+  width: 475px;
   height: 200px;
 }
+
+.button-addons {
+  margin-left: 400px;
+}
+
+
+
+  /* border: none;
+ outline: none;
+ padding: 10px 16px;
+ cursor: pointer; */

@@ -15,3 +15,9 @@ li {
 .nav-link {
   text-decoration: none;
 }
+
+.nav-login {
+  font-size: 12px;
+  color: grey;
+  margin-left: 640px;
+}
