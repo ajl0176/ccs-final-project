@@ -1,21 +1,21 @@
-from rest_framework import generics
-from rest_framework import permissions
+from django.shortcuts import render
+from rest_framework import generics, permissions
 
-from .models import location
-from .serializers import LocationSerializer
+from .models import Location
+from .serializers import LocationsSerializer
 
 
 
 
 class LocationListCreateView(generics.ListCreateAPIView):
     queryset = Location.objects.all()
-    serializer_class = LocationSerializer
-    permission_classes = (permsissions.IsAuthenticatedOrReadOnly,)
+    serializer_class = LocationsSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 class LocationDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Location.objects.all()
-    serializer_class = LocationSerializer
-    permission_classes = (permsissions.IsAuthenticatedOrReadOnly,)
+    serializer_class = LocationsSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
 # Create your views here.

@@ -1,10 +1,10 @@
-from django.urls import path
+from django.urls import path, include
 
 from .views import LocationListCreateView, LocationDetailView
 
 
 
-urls = [
-    path('<int:pk>', LocationDetailView.as_view()),
+urlpatterns = [
+    path('<int:pk>', LocationDetailView.as_view(), name="location"),
     path('', LocationListCreateView.as_view()),
 ]

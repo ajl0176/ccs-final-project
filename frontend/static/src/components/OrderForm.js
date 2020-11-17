@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Col, Row, Form, FormGroup, Input, Label, Button, CustomInput } from 'reactstrap';
-import emailjs from 'emailjs-com';
+import { Col, Row, Form, FormGroup, Input, Label } from 'reactstrap';
+// import $ from 'jQuery';
+// import emailjs from 'emailjs-com';
 
 
 class OrderForm extends Component {
@@ -10,10 +11,69 @@ class OrderForm extends Component {
         value:'',
       };
 
+      this.sendEmail = this.sendEmail.bind(this);
+
+    }
+
+    sendEmail(e) {
+
+
+      e.preventDefault(); // prevent reload
+      // console.log(e.target.orderList.value)
+
+      let orderList = '';
+      this.props.order.forEach(item => {
+        console.log(item);
+        orderList += item.entree;
+      });
+      console.log(orderList);
+
+      let params = {
+        user_id: 'user_sr0w503Gqj0aj0jeBbrWw',
+        service_id: 'service_wdl1o7j',
+        template_id: 'template_17m2cti',
+        template_params: {
+          'name':  e.target.name.value,
+          'phone': e.target.phone.value,
+          'email': e.target.email.value,
+          'date': e.target.date.value,
+          'orderList': orderList,
+          'subtotal': e.target.subtotal,
+
+        }
+      };
+
+      let headers = {
+          'Content-type': 'application/json'
+      };
+
+      let options = {
+          method: 'POST',
+          headers: headers,
+          body: JSON.stringify(params)
+      };
+
+      fetch('https://api.emailjs.com/api/v1.0/email/send', options)
+        .then((httpResponse) => {
+            if (httpResponse.ok) {
+                console.log('Your mail is sent!');
+            } else {
+                return httpResponse.text()
+                  .then(text => Promise.reject(text));
+            }
+        })
+        .catch((error) => {
+            console.log('Oops... ' + error);
+        });
+
+        e.target.reset();
+        this.props.checkOut();
+
     }
 
 
     render() {
+
       const subtotal = this.props.order.reduce((acc, item)=> {
       let total = acc + Number(item.price)
           return total
@@ -27,21 +87,22 @@ class OrderForm extends Component {
         </div>
       ));
 
-      function sendEmail(e){
-        e.preventDefault();
+      // function sendEmail(e){
+        // e.preventDefault();
+        // console.log(e.target)
 
-        emailjs.sendForm('service_wdl1o7j', 'template_17m2cti', e.target, 'user_sr0w503Gqj0aj0jeBbrWw')
-        .then((result) => {
-          console.log(result.text);
-      }, (error) => {
-          console.log(error.text);
-      });
-      e.target.reset()
-      }
+      //   emailjs.sendForm('service_wdl1o7j', 'template_17m2cti', e.target, 'user_sr0w503Gqj0aj0jeBbrWw')
+      //   .then((result) => {
+      //     console.log(result.text);
+      // }, (error) => {
+      //     console.log(error.text);
+      // });
+      // e.target.reset()
+      // }
 
           return(
           <React.Fragment>
-            <Form onSubmit={sendEmail}>
+            <Form onSubmit={this.sendEmail}>
               <h2 className="foodCategory">Order Form</h2>
               <Row form>
                 <Col md={6}>
@@ -69,11 +130,11 @@ class OrderForm extends Component {
                   onchange={this.handleChange}
                 />
               </FormGroup>
-            <FormGroup>
 
+            <FormGroup>
                 <div className="row justify-content-between">
                 <div className="col-12">{orderList}
-                <hr className="solid"/>
+                  <hr className="solid"/>
                 </div>
                 </div>
             <div className="row justify-content-center">
@@ -84,10 +145,11 @@ class OrderForm extends Component {
                   </div>
               </div>
             </div>
+
             <div className="col-6">
-              <input type="submit" className="btn btn-info" value="Check Out" onClick={this.props.checkOut}></input>
+              <input type="submit" className="btn btn-info" value="Check Out"></input>
             </div>
-          </FormGroup>
+            </FormGroup>
         </Form>
       </React.Fragment>
             )

@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import MenuList from './MenuList';
 import OrderForm from './OrderForm';
 import Cookies from 'js-cookie';
-import TestForm from './TestForm';
-
-
 
 class Menu extends Component {
 
@@ -23,7 +20,6 @@ class Menu extends Component {
     this.checkOut = this.checkOut.bind(this);
     this.fetchMenuItems = this.fetchMenuItems.bind(this);
     this.fetchAddOns = this.fetchAddOns.bind(this);
-    this.deleteItem = this.deleteItem.bind(this);
   }
 
   addOrder(item) {
@@ -42,7 +38,6 @@ class Menu extends Component {
   }
 
   checkOut() {
-    alert("Your order was submitted!");
     this.setState({order: []});
   }
 
@@ -61,20 +56,6 @@ class Menu extends Component {
       .then(error=> console.log('Error', error));
   }
 
-  async deleteItem(e) {
-    // e.preventDefault();
-
-    const options = {
-      method: 'DELETE',
-      headers: {
-        'X-CSRFToken': Cookies.get('csrftoken'),
-        },
-      };
-      const handleError = (err) => console.warn(err);
-      const response =  await fetch (`/api/v1/menuitems/${this.state.menuitems}`, options)
-      const data = await response.json().catch(handleError)
-      console.log(data);
-    }
 
   componentDidMount() {
     this.fetchMenuItems();

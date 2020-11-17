@@ -16,19 +16,18 @@ function Nav(props) {
         }
         {props.isAuth
         ?
-        <li><Link to={'/calendarform'} className="nav-link">Calendar Form</Link></li>
+        <li><Link to={'/locationform'} className="nav-link">Location Form</Link></li>
         :
         <li><Link to={'/map'} className="nav-link">Location</Link></li>
         }
         <li><Link to ={'/contact'} className="nav-link">Contact</Link></li>
-        <li><Link to={'/testform'} className="nav-link">Test Form</Link></li>
         {props.isAuth
         ?
         <button type="button" className="btn btn-secondary btn-lg" onClick={props.handleLogout}>Log out</button>
         :
         <li><Link to={'/login'} className="nav-login">Admin</Link></li>
         }
-    
+
       </ul>
     </nav>
     <div>

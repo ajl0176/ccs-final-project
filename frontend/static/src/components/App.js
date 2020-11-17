@@ -6,16 +6,13 @@ import Menu from './Menu';
 import MenuForm from './MenuForm';
 import Map from './Map';
 import Contact from './Contact';
-import EditMenu from './EditMenu';
-import CalendarForm from './CalendarForm';
+import LocationForm from './LocationForm';
 // import CalendarList from './CalendarList';
 // import MenuList from './MenuList';
 // import OrderForm from './OrderForm';
+import MapAddMarker from './MapAddMarker';
 import LoginForm from './LoginForm';
 import Registration from './Registration';
-import TestForm from './TestForm';
-import MapAutoComplete from './MapAutoComplete';
-import MapAddMarker from './MapAddMarker';
 import Nav from './Nav';
 import Cookies from 'js-cookie';
 
@@ -120,9 +117,7 @@ class App extends Component {
             <Route path='/' component={Home} exact />
             <Route path='/home' component={Home} />
             <Route path='/contact' component={Contact} />
-            <Route path='/editmenu' component={EditMenu} />
-            <Route path='/calendarform' component={CalendarForm} />
-            <Route path='/testform' component={TestForm} />
+            <Route path='/locationform' component={LocationForm} />
          </Switch>
 
         </React.Fragment>

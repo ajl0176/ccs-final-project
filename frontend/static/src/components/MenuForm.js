@@ -10,6 +10,7 @@ class MenuForm extends Component {
     this.state ={
       entree: '',
       price: '',
+      menuItems: [],
       description: '',
       image: null,
       is_active: false,
@@ -18,7 +19,14 @@ class MenuForm extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.addItem = this.addItem.bind(this);
     this.handleImage = this.handleImage.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
+    this.fetchMenuItems = this.fetchMenuItems.bind(this);
+
   }
+  componentDidMount(){
+    this.fetchMenuItems()
+  }
+
 
   handleChange (event){
     this.setState({[event.target.name]:event.target.value})
@@ -70,7 +78,34 @@ class MenuForm extends Component {
 
 }
 
+async deleteItem(e) {
+  // e.preventDefault();
+
+  const options = {
+    method: 'DELETE',
+    headers: {
+      'X-CSRFToken': Cookies.get('csrftoken'),
+      },
+    };
+    const handleError = (err) => console.warn(err);
+    const response =  await fetch ('/api/v1/menuitems/form/', options)
+    const data = await response.json().catch(handleError)
+    console.log(data);
+  }
+
+
+  fetchMenuItems() {
+    fetch('/api/v1/menuitems/')
+      .then(response => response.json())
+      .then(data => this.setState({menuItems: data}))
+      .then(error=> console.log('Error', error));
+
+  }
+
+
+
 render(){
+  let menuitems = this.state.menuItems.map(item => <AdminItem key={item.id}  deleteItem={this.deleteItem} item={item}/>);
   return(
   <React.Fragment>
     <form className="col-12 col-md-6 form" onSubmit={(e) => this.addItem(e, this.state)}>
@@ -89,9 +124,39 @@ render(){
       </div>
       <button type="submit" className="btn btn-primary">Add Item</button>
     </form>
+
   </React.Fragment>
     );
   }
+}
+
+class AdminItem extends Component  {
+
+  constructor(props){
+    super(props);
+    this.state = {
+    }
+  }
+
+  render(){
+    return (
+      <React.Fragment>
+        <div>
+          <ul className="menu-list">
+            <div className="row ">
+              <h5 className="col-10 ">{this.props.item.entree}</h5>
+              <h5 className="col-2">${this.props.item.price}</h5>
+            </div>
+              <p className="col-md-auto mb-1"> {this.props.item.description}</p>
+              <img src={this.props.item.image} alt=""/>
+              <button type="button" className="btn btn-sm btn-light" onClick={()=>this.props.deleteItem(this.props.item.id)}>Delete</button>
+          <hr/>
+        </ul>
+      </div>
+    </React.Fragment>
+    );
+  }
+
 }
 
 export default MenuForm;

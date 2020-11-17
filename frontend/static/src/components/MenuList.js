@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Col, Row, Form, FormGroup, Input, Label, Button, CustomInput } from 'reactstrap';
 import './Menu.css';
 
 class FoodItem extends Component  {
@@ -57,7 +56,7 @@ class MenuList extends Component {
     // price
 
     const price = this.state.createYourOwn.reduce((acc, i) => acc + Number(i.price), 0);
-    const entree = this.state.createYourOwn.reduce((acc, i) => acc + i.item, "Add on: ");
+    const entree = this.state.createYourOwn.reduce((acc, i) => acc + i.item, "Add on:   ");
     this.props.addOrder({entree, price})
 
     console.log(entree, price);
@@ -118,7 +117,7 @@ class MenuList extends Component {
        <div className="addOns">
         {addOns}
       </div>
-<button type="button-addons" onClick={this.addAddOnToOrder}>Add to Order</button>
+      <button type="button-addons" onClick={this.addAddOnToOrder}>Add to Order</button>
       <div>
 
         </div>

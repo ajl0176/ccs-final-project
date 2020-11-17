@@ -4,8 +4,8 @@ from .models import Location
 
 
 
-class LocationSerializer(serializers.ModelSerializer):
+class LocationsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Location
-        fields = ('id', 'name', 'address', 'lat', 'lng', 'days', 'hours', 'dayOpen', 'dayClose', 'hourOpen', 'hourClose', 'website',)
+        fields = ('map_location',)

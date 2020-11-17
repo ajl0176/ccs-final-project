@@ -19,7 +19,10 @@ img {
   margin-left: 400px;
 }
 
-
+entree.space::after{
+  content:"  ";
+  white-space: pre;
+}
 
   /* border: none;
  outline: none;
