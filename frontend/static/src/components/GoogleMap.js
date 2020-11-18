@@ -3,12 +3,13 @@ import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import './map.css';
 import styled from 'styled-components';
-
+import CalendarList from './CalendarList';
 import AutoComplete from './Autocomplete';
 import Marker from './Marker';
+import Cookies from 'js-cookie';
 
 const Wrapper = styled.main`
-  width: 50%;
+  width: 100%;
   height: 50vh;
 `;
 
@@ -16,6 +17,7 @@ class GoogleMap extends Component {
 
 
   state = {
+    events: [],
     mapApiLoaded: false,
     mapInstance: null,
     mapApi: null,
@@ -116,6 +118,13 @@ class GoogleMap extends Component {
       }
     }
 
+    componentDidMount() {
+      fetch('/api/v1/events/')
+      .then(response => response.json())
+      .then(data => this.setState({events:data}))
+      .then(error => console.log('Error', error));
+    }
+
     render() {
       const {
         places, mapApiLoaded, mapInstance, mapApi,
@@ -125,13 +134,19 @@ class GoogleMap extends Component {
       return (
         <Wrapper>
 
+        <div className="row">
+          <div className="col-6">
+            <CalendarList events={this.state.events}/>
+          </div>
+          <div className="col-5">
           {mapApiLoaded && (
             <div>
               <AutoComplete map={mapInstance} mapApi={mapApi} addplace={this.addPlace} />
             </div>
           )}
+          <div style={{ height: '500px', width: '100%' }}>
             <GoogleMapReact
-              center={this.state.center}
+              center={{lat:34.6834, lng:-82.8374}}
               zoom={this.state.zoom}
               draggable={this.state.draggable}
               onChange={this._onChange}
@@ -141,7 +156,7 @@ class GoogleMap extends Component {
               onChildClick={() => console.log('child click')}
               onClick={this._onClick}
               bootstrapURLKeys={{
-                key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+                key: `${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`,
                 libraries: ['places', 'geometry'],
               }}
               yesIWantToUseGoogleMapApiInternals
@@ -155,15 +170,14 @@ class GoogleMap extends Component {
               />
 
             </GoogleMapReact>
-
-
-          <div className="info-wrapper">
-            <div className="map-details">Latitude: <span>{this.state.lat}</span>, Longitude: <span>{this.state.lng}</span></div>
-            <div className="map-details">Zoom: <span>{this.state.zoom}</span></div>
-            <div className="map-details">Address: <span>{this.state.address}</span></div>
+            </div>
+            </div>
           </div>
 
-            </Wrapper >
+
+
+
+            </Wrapper>
         );
     }
 }

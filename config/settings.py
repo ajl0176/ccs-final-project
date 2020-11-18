@@ -59,7 +59,6 @@ INSTALLED_APPS = [
     'addition.apps.AdditionConfig',
     'events.apps.EventsConfig',
     'frontend.apps.FrontendConfig',
-    'locations.apps.LocationsConfig',
     'menu.apps.MenuConfig',
 
 ]

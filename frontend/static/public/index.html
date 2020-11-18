@@ -29,12 +29,6 @@
   </head>
 
 
-  <script
-    src=`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&libraries=places&callback=initMap`
-
-  ></script>
-
-
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
 
@@ -53,8 +47,10 @@
 
 
     -->
-
-
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&callback=initMap&libraries=&v=weekly"
+          defer
+        ></script>
   </body>
 
 </html>

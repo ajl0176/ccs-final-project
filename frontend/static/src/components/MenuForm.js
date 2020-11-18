@@ -18,13 +18,14 @@ class MenuForm extends Component {
     }
     this.handleChange = this.handleChange.bind(this);
     this.addItem = this.addItem.bind(this);
+    this.editItem = this.editItem.bind(this);
     this.handleImage = this.handleImage.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
     this.fetchMenuItems = this.fetchMenuItems.bind(this);
 
   }
-  componentDidMount(){
-    this.fetchMenuItems()
+  async componentDidMount(){
+    await this.fetchMenuItems()
   }
 
 
@@ -78,6 +79,10 @@ class MenuForm extends Component {
 
 }
 
+
+
+
+
 async deleteItem(item) {
 console.log(item)
   const options = {
@@ -121,6 +126,7 @@ render(){
         <label htmlFor="is_active">Is Active</label>
         <input type="checkbox" checked={this.state.is_active} onChange={()=>this.setState(prevState =>({is_active: !prevState.is_active}))} />
       </div>
+      <button type="button" className="btn btn-primary">Save Changes</button>
       <button type="submit" className="btn btn-primary">Add Item</button>
     </form>
     {menuitems}

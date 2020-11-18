@@ -1,9 +1,41 @@
-.contact-title {
-  display: flex;
-  justify-content:center;
+.contact-title{
+  position: relative;
+  text-align: center;
+
 }
 
-img {
+.centered-title{
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family:Impact;
+  font-weight: 300;
+  font-size: xxx-large;
+}
+
+.centered-phone{
+  position: absolute;
+  top: 28%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family:Impact;
+  font-weight: 300;
+  font-size: xxx-large;
+}
+
+.centered-email{
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family:Impact;
+  font-weight: 300;
+  font-size: xxx-large;
+}
+
+.contact-pic{
   opacity: 0.2;
-  width: 500px;
+  width: 100%;
+  height:100%;
 }

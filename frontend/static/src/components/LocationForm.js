@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import GoogleMapReact from 'google-map-react';
-// import MapAddMarker from './MapAddMarker';
+
+
 import Cookies from 'js-cookie';
 // import GoogleMap from './GoogleMap';
 
@@ -72,30 +72,30 @@ class LocationForm extends Component {
 
   };
 
-  changeLocation(e){
-    e.preventDefault();
+  // changeLocation(e){
+  //   e.preventDefault();
+  //
+  //   const csrftoken = Cookies.get('csrftoken');
+  //
+  //   let formData = new FormData();
+  //   formData.append('map_location', this.state.map_location);
+  //
+  //   console.log(formData);
+  //   const options = {
+  //      method: 'POST',
+  //      headers: {
+  //        'X-CSRFToken': csrftoken,
+  //      },
+  //      body: formData
+  //   };
+  //   fetch('/api/v1/events/locations/', options)
+  //   .then(response => response.json())
+  //   .then(data => console.log(data))
+  // }
 
-    const csrftoken = Cookies.get('csrftoken');
-
-    let formData = new FormData();
-    formData.append('map_location', this.state.map_location);
-
-    console.log(formData);
-    const options = {
-       method: 'POST',
-       headers: {
-         'X-CSRFToken': csrftoken,
-       },
-       body: formData
-    };
-    fetch('/api/v1/events/locations/', options)
-    .then(response => response.json())
-    .then(data => console.log(data))
-  }
 
 
-
-  async deleteDate(e) {
+  async deleteDate(item) {
     // e.preventDefault();
 
     const options = {
@@ -105,7 +105,7 @@ class LocationForm extends Component {
         },
       };
       const handleError = (err) => console.warn(err);
-      const response =  await fetch ('/api/v1/events/form/', options)
+      const response =  await fetch (`/api/v1/events/form/${item.id}`, options)
       const data = await response.json().catch(handleError)
       console.log(data);
     }
@@ -170,7 +170,7 @@ class LocationForm extends Component {
             <h5 className="col-2">{this.props.item.day}</h5>
             <h5 className="col-10">{this.props.item.location} </h5>
           </div>
-          <button type="button" className="btn btn-sm btn-light" onClick={(e)=>this.props.item.deleteItem(e)}>Delete</button>
+          <button type="button" className="btn btn-sm btn-light" onClick={()=>this.props.deleteDate(this.props.item)}>Delete</button>
           <hr/>
         </ul>
       </div>

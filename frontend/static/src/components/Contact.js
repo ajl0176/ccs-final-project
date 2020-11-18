@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import './Contact.css';
 
 
 
@@ -11,17 +12,12 @@ constructor(props) {
 
   render() {
     return(
-      <section>
-
-      <div className="image">
-      <div className="grid"> <img src="96D790C9-1646-46D9-B0E4-BDFB94FDFEF5_1_105_c.jpeg" alt="Logo"/></div>
+    <div className="contact-title">
+      <img className="contact-pic" src = "308355EA-A4E1-474A-AEBD-8AF760B15577.jpeg" alt="Logo"/>
+        <div className="centered-title"> Contact Information:</div>
+        <div className="centered-phone"> PHONE: 864-616-1151 </div>
+        <div className="centered-email"> EMAIL: Organiconthego1@gmail.com</div>
       </div>
-        <div className="col">
-        <h2 className="contact-title"> Please Contact Us At:</h2>
-        <h3> EMAIL: Organiconthego1@gmail.com</h3>
-        <h3> PHONE: 864-616-1151 </h3>
-        </div>
-      </section>
 
     );
   }

@@ -56,7 +56,7 @@ class MenuList extends Component {
     // price
 
     const price = this.state.createYourOwn.reduce((acc, i) => acc + Number(i.price), 0);
-    const entree = this.state.createYourOwn.reduce((acc, i) => acc + `${i.item}   `, "Add on:   ");
+    const entree = this.state.createYourOwn.reduce((acc, i) => acc + `${i.item}    `, "Add on:   ");
     this.props.addOrder({entree, price})
     this.setState({createYourOwn:[]})
     console.log(entree, price);
@@ -90,7 +90,7 @@ class MenuList extends Component {
 
           <div className="container">
             <div className="row">
-              <div className= "col-12">
+              <div className= "col-category">
                 <h2 className="category">{category}</h2>
                 <div className="col">
                 <div className="row">

@@ -34,15 +34,16 @@ class EventItem extends Component  {
 class CalendarList extends Component {
 
   render() {
-    const events = this.props.events.map((item)=> <EventItem  item={item}/>);
+    const events = this.props.events.map((item)=> <EventItem key={item.id} addDate={this.props.addDate}  item={item}/>);
+    console.log(events)
 
     return(
 
       <div className="col">
         <h2 className="locations">Weekly Location</h2>
       {events}
-
       </div>
+
     )
   }
 }
