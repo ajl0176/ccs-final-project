@@ -1,27 +1,68 @@
-.foodCategory {
+.foodCategory-menu {
   text-align: center;
+  font-family:Impact;
+  font-weight: 300;
+  margin-top:20px;
+  font-size: xxx-large;
 
+}
+
+.foodCategory-own {
+  text-align: center;
+  font-family:Impact;
+  font-weight: 300;
+  margin-top:20px;
+  font-size: xxx-large;
+
+}
+
+h5 {
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.category {
+  font-weight: bold;
+  font-size: 30px;
+  margin-left: 11px;
+}
+
+.descript {
+  font-style: italic;
+  font-size: 16px;
+  margin-right:200px;
 }
 
 .addOns {
    display:flex;
-   justify-content: space-around;
-   margin-left: 62px;
-   ;
+   margin-left: 38px;
+}
+
+.btn {
+  text-align: left;
+}
+.col-items {
+  font-size: 15px;
 }
 
 img {
   width: 475px;
   height: 200px;
+  border: 3px solid;
 }
 
 .button-addons {
-  margin-left: 400px;
+  margin-left: 345px;
 }
 
 entree.space::after{
   content:"  ";
   white-space: pre;
+}
+
+hr {
+  border: 1px solid;
+  margin-left: -11px;
 }
 
   /* border: none;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Col, Row, Form, FormGroup, Input, Label } from 'reactstrap';
-// import $ from 'jQuery';
+ import './OrderForm.css';
 // import emailjs from 'emailjs-com';
 
 
@@ -104,6 +104,7 @@ class OrderForm extends Component {
           <React.Fragment>
             <Form onSubmit={this.sendEmail}>
               <h2 className="foodCategory">Order Form</h2>
+              <br />
               <Row form>
                 <Col md={6}>
                   <FormGroup>

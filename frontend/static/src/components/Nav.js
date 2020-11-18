@@ -18,7 +18,7 @@ function Nav(props) {
         ?
         <li><Link to={'/locationform'} className="nav-link">Location Form</Link></li>
         :
-        <li><Link to={'/map'} className="nav-link">Location</Link></li>
+        <li><Link to={'/googlemap'} className="nav-link">Location</Link></li>
         }
         <li><Link to ={'/contact'} className="nav-link">Contact</Link></li>
         {props.isAuth
@@ -31,7 +31,7 @@ function Nav(props) {
       </ul>
     </nav>
     <div>
-      <hr />
+
 
     </div>
 

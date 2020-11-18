@@ -1,0 +1,9 @@
+.contact-title {
+  display: flex;
+  justify-content:center;
+}
+
+img {
+  opacity: 0.2;
+  width: 500px;
+}

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
-import MapAddMarker from './MapAddMarker';
+// import MapAddMarker from './MapAddMarker';
 import Cookies from 'js-cookie';
-import Map from './Map';
+// import GoogleMap from './GoogleMap';
 
 
 class LocationForm extends Component {
@@ -18,8 +18,13 @@ class LocationForm extends Component {
     }
     this.handleChange = this.handleChange.bind(this);
     this.addDate = this.addDate.bind(this);
+    this.deleteDate = this.deleteDate.bind(this);
     // this.handleImage = this.handleImage.bind(this);
 
+  }
+
+  componentDidMount(){
+    this.fetchEvents()
   }
 
   handleChange (event){
@@ -89,7 +94,34 @@ class LocationForm extends Component {
   }
 
 
+
+  async deleteDate(e) {
+    // e.preventDefault();
+
+    const options = {
+      method: 'DELETE',
+      headers: {
+        'X-CSRFToken': Cookies.get('csrftoken'),
+        },
+      };
+      const handleError = (err) => console.warn(err);
+      const response =  await fetch ('/api/v1/events/form/', options)
+      const data = await response.json().catch(handleError)
+      console.log(data);
+    }
+
+
+    fetchEvents() {
+      fetch('/api/v1/events/form/')
+        .then(response => response.json())
+        .then(data => this.setState({events: data}))
+        .then(error=> console.log('Error', error));
+
+    }
+
   render() {
+    let events = this.state.events?.map(item => <AdminDate key={item.id}  deleteDate={this.deleteDate} item={item}/>);
+    console.log(this.state.events);
     return (
       <React.Fragment>
         <form className="col-12 col-md-6 form" onSubmit={(e) => this.addDate(e, this.state)}>
@@ -113,11 +145,40 @@ class LocationForm extends Component {
       <button type="submit" className= "btn btn-primary">Change Location</button>
       </div>
       </form>
-
+      {events}
     </React.Fragment>
       );
 
     }
+  }
+
+
+
+
+  class AdminDate extends Component  {
+
+    constructor(props){
+      super(props);
+      this.state = {
+      }
+    }
+    render(){
+      return (
+        <div className="col-12 col-md-6 form">
+        <ul className="address-list">
+          <div className="row ">
+            <h5 className="col-2">{this.props.item.day}</h5>
+            <h5 className="col-10">{this.props.item.location} </h5>
+          </div>
+          <button type="button" className="btn btn-sm btn-light" onClick={(e)=>this.props.item.deleteItem(e)}>Delete</button>
+          <hr/>
+        </ul>
+      </div>
+
+
+      );
+    }
+
   }
 
   export default LocationForm;

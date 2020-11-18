@@ -4,13 +4,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './Home';
 import Menu from './Menu';
 import MenuForm from './MenuForm';
-import Map from './Map';
+import GoogleMap from './GoogleMap';
 import Contact from './Contact';
 import LocationForm from './LocationForm';
 // import CalendarList from './CalendarList';
 // import MenuList from './MenuList';
 // import OrderForm from './OrderForm';
-import MapAddMarker from './MapAddMarker';
 import LoginForm from './LoginForm';
 import Registration from './Registration';
 import Nav from './Nav';
@@ -111,7 +110,7 @@ class App extends Component {
           <Switch>
             <Route path='/menuform' component={MenuForm}/>
             <Route path='/menu' component={Menu} />
-            <Route path='/map' component={Map} />
+            <Route path='/googlemap' component={GoogleMap} />
             <Route path='/login' render={(props) => <LoginForm isAuth={this.state.isAuth} handleLogin={this.handleLogin} />}/>
             <Route path='/registration' render={(props) => <Registration isAuth={this.state.isAuth} handleRegistration={this.handleRegistration} />}/>
             <Route path='/' component={Home} exact />

@@ -15,13 +15,13 @@ class FoodItem extends Component  {
         <div className="container">
           <ul className="menu-list">
               <div className="row ">
-                <h5 className="col-10 ">{this.props.item.entree}</h5>
-                <h5 className="col-2">${this.props.item.price}</h5>
+                <h5 className="col-9 ">{this.props.item.entree}</h5>
+                <h5 className="col-3">${this.props.item.price}</h5>
               </div>
-                <p className="col-md-auto mb-1"> {this.props.item.description}</p>
+                <p className="descript"> {this.props.item.description}</p>
                 <img src={this.props.item.image} alt=""/>
                 <button type="button" className="btn btn-sm btn-light" onClick={()=>this.props.addOrder(this.props.item)}>Add to Order</button>
-          <hr/>
+          <hr className="col-10"/>
           </ul>
         </div>
     </main>
@@ -56,9 +56,9 @@ class MenuList extends Component {
     // price
 
     const price = this.state.createYourOwn.reduce((acc, i) => acc + Number(i.price), 0);
-    const entree = this.state.createYourOwn.reduce((acc, i) => acc + i.item, "Add on:   ");
+    const entree = this.state.createYourOwn.reduce((acc, i) => acc + `${i.item}   `, "Add on:   ");
     this.props.addOrder({entree, price})
-
+    this.setState({createYourOwn:[]})
     console.log(entree, price);
   }
 
@@ -91,10 +91,10 @@ class MenuList extends Component {
           <div className="container">
             <div className="row">
               <div className= "col-12">
-                <h2>{category}</h2>
+                <h2 className="category">{category}</h2>
                 <div className="col">
                 <div className="row">
-                <h5 className=" btn" role="button" aria-pressed="True">{items}</h5>
+                <h5 className="btn"  aria-pressed="True">{items}</h5>
                 <h5 className="btn">{prices}</h5>
                 </div>
                 </div>
@@ -110,16 +110,17 @@ class MenuList extends Component {
     return(
       <React.Fragment>
         <div className="col">
-          <h2 className="foodCategory">Menu</h2>
+          <h2 className="foodCategory-menu">Menu</h2>
           {menuitems}
        </div>
-       <h2 className="foodCategory">Make Your Own!</h2>
+       <h2 className="foodCategory-own">Make Your Own!</h2>
        <div className="addOns">
         {addOns}
       </div>
-      <button type="button-addons" onClick={this.addAddOnToOrder}>Add to Order</button>
+      <button className="button-addons" onClick={this.addAddOnToOrder}>Add to Order</button>
       <div>
-
+      <br />
+      <br />
         </div>
 
     </React.Fragment>

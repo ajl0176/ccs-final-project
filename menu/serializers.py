@@ -8,11 +8,11 @@ class MenuSerializer (serializers.ModelSerializer):
 
     class Meta:
         model = Menuitem
-        fields = ('id', 'entree','price','checkbox', 'description', 'image', 'is_active')
+        fields = ('id', 'entree','price', 'description', 'image', 'is_active')
 
 
 class AddOnSerializer (serializers.ModelSerializer):
 
     class Meta:
         model = AddOn
-        fields = ('id', 'item','price', 'checkbox', 'category', 'is_active')
+        fields = ('id', 'item','price', 'category', 'is_active')

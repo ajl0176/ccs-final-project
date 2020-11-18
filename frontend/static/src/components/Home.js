@@ -16,7 +16,7 @@ class Home extends Component {
 
 
         <div className="logo">
-          <img className="logo" src = "/Logo.jpg" alt="Logo"/>
+          <img className="logo" src = "96D790C9-1646-46D9-B0E4-BDFB94FDFEF5_1_105_c.jpeg" alt="Logo"/>
         </div>
         </div>
 

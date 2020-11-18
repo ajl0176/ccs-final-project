@@ -78,9 +78,8 @@ class MenuForm extends Component {
 
 }
 
-async deleteItem(e) {
-  // e.preventDefault();
-
+async deleteItem(item) {
+console.log(item)
   const options = {
     method: 'DELETE',
     headers: {
@@ -88,14 +87,14 @@ async deleteItem(e) {
       },
     };
     const handleError = (err) => console.warn(err);
-    const response =  await fetch ('/api/v1/menuitems/form/', options)
+    const response =  await fetch (`/api/v1/menuitems/form/${item.id}`, options)
     const data = await response.json().catch(handleError)
     console.log(data);
   }
 
 
   fetchMenuItems() {
-    fetch('/api/v1/menuitems/')
+    fetch('/api/v1/menuitems/form/')
       .then(response => response.json())
       .then(data => this.setState({menuItems: data}))
       .then(error=> console.log('Error', error));
@@ -103,9 +102,9 @@ async deleteItem(e) {
   }
 
 
-
 render(){
-  let menuitems = this.state.menuItems.map(item => <AdminItem key={item.id}  deleteItem={this.deleteItem} item={item}/>);
+  let menuitems = this.state.menuItems?.map(item => <AdminItem key={item.id}  deleteItem={this.deleteItem} item={item}/>);
+  console.log(this.state.menuItems);
   return(
   <React.Fragment>
     <form className="col-12 col-md-6 form" onSubmit={(e) => this.addItem(e, this.state)}>
@@ -124,7 +123,7 @@ render(){
       </div>
       <button type="submit" className="btn btn-primary">Add Item</button>
     </form>
-
+    {menuitems}
   </React.Fragment>
     );
   }
@@ -140,20 +139,17 @@ class AdminItem extends Component  {
 
   render(){
     return (
-      <React.Fragment>
-        <div>
-          <ul className="menu-list">
-            <div className="row ">
-              <h5 className="col-10 ">{this.props.item.entree}</h5>
-              <h5 className="col-2">${this.props.item.price}</h5>
-            </div>
-              <p className="col-md-auto mb-1"> {this.props.item.description}</p>
-              <img src={this.props.item.image} alt=""/>
-              <button type="button" className="btn btn-sm btn-light" onClick={()=>this.props.deleteItem(this.props.item.id)}>Delete</button>
-          <hr/>
-        </ul>
-      </div>
-    </React.Fragment>
+      <ul className="menu-list">
+        <div className="row ">
+          <h5 className="col-10">{this.props.item.entree}</h5>
+          <h5 className="col-2">{this.props.item.price} </h5>
+        </div>
+        <p className="col-md-auto mb-1">{this.props.item.description}</p>
+        <button type="button" className="btn btn-sm btn-light" onClick={()=>this.props.deleteItem(this.props.item)}>Delete</button>
+        <hr/>
+      </ul>
+
+
     );
   }
 

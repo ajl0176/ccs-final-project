@@ -1,3 +1,13 @@
 .background-black {
   background-color: black;
 }
+
+body {background-color: #E8F7F9}
+
+/* .container {
+  background-color: black;
+} */
+
+.logo {
+  border: none;
+}
