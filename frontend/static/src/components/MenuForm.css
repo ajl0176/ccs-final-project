@@ -1,0 +1,9 @@
+@media screen and (max-width:768px){
+  .form::before {
+    left: 0;
+    right: auto;
+    border: medium solid white;
+    border-width: 15px 20px 15px 0px;
+    border-color: transparent #fff transparent transparent;
+    transform: translateX(-100%);
+}

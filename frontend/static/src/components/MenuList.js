@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import 'bootstrap/dist/css/bootstrap.css';
 import './Menu.css';
 
 class FoodItem extends Component  {
@@ -15,8 +16,8 @@ class FoodItem extends Component  {
         <div className="container">
           <ul className="menu-list">
               <div className="row ">
-                <h5 className="col-9 ">{this.props.item.entree}</h5>
-                <h5 className="col-3">${this.props.item.price}</h5>
+                <h5 className="col-8 ">{this.props.item.entree}</h5>
+                <h5 className="col-2">${this.props.item.price}</h5>
               </div>
                 <p className="descript"> {this.props.item.description}</p>
                 <img src={this.props.item.image} alt=""/>
@@ -75,11 +76,11 @@ class MenuList extends Component {
       // console.log('single', category)
       const items = this.props.addOns
         .filter(addOn => addOn.category === category)
-        .map(addOn => (<p key={addOn.id} onClick={() => this.addToCreateYourOwn(addOn)}>{addOn.item} </p>));
+        .map(addOn => (<p class="btn btn-outline-dark" type="submit" key={addOn.id} onClick={() => this.addToCreateYourOwn(addOn)}>{addOn.item}  </p>) );
 
       const prices = this.props.addOns
       .filter(addOn => addOn.category === category)
-      .map(addOn => (<p key={addOn.id}>${addOn.price} </p>));
+      .map(addOn => (<p className="price" key={addOn.id}>${addOn.price} </p>));
 
       // addOrder={this.props.addOrder}
 
@@ -93,9 +94,9 @@ class MenuList extends Component {
               <div className= "col-category">
                 <h2 className="category">{category}</h2>
                 <div className="col">
-                <div className="row">
-                <h5 className="btn"  aria-pressed="True">{items}</h5>
-                <h5 className="btn">{prices}</h5>
+                <div className="row-category">
+                <h5 className="col-5 items">{items}</h5>
+                <h5 className="col-3 category">{prices}</h5>
                 </div>
                 </div>
                 </div>
@@ -111,6 +112,7 @@ class MenuList extends Component {
       <React.Fragment>
         <div className="col">
           <h2 className="foodCategory-menu">Menu</h2>
+          <br />
           {menuitems}
        </div>
        <h2 className="foodCategory-own">Make Your Own!</h2>

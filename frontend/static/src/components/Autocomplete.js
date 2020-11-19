@@ -1,5 +1,6 @@
 // Autocomplete.js
 import React, { Component } from 'react';
+import 'bootstrap/dist/css/bootstrap.css';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -14,7 +15,22 @@ const Wrapper = styled.div`
 class Autocomplete extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      selectedLocation: null,
+    }
     this.clearSearchBox = this.clearSearchBox.bind(this);
+    }
+
+    static getDerivedStateFromProps(props, state) {
+      // Any time the current user changes,
+      // Reset any parts of state that are tied to that user.
+      // In this simple example, that's just the email.
+      if (props.selectedLocation !== state.selectedLocation) {
+        return {
+          selectedLocation: props.selectedLocation,
+        };
+      }
+      return null;
     }
 
   componentDidMount({ map, mapApi } = this.props) {
@@ -37,7 +53,9 @@ class Autocomplete extends Component {
     }
 
     onPlaceChanged = ({ map, addplace } = this.props) => {
+      console.log('firing', )
       const place = this.autoComplete.getPlace();
+      // console.log('auto place', place)
 
       if (!place.geometry) return;
       if (place.geometry.viewport) {
@@ -48,6 +66,7 @@ class Autocomplete extends Component {
       }
 
       addplace(place);
+      console.log('addplace', place)
       this.searchInput.blur();
     };
 

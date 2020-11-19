@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Switch,Route, withRouter } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.css';
 import Home from './Home';
 import Menu from './Menu';
 import MenuForm from './MenuForm';

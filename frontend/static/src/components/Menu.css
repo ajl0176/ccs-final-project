@@ -1,7 +1,7 @@
 .foodCategory-menu {
   text-align: center;
-  font-family:Impact;
-  font-weight: 300;
+  font-family:serif;
+  font-weight:bolder;
   margin-top:20px;
   font-size: xxx-large;
 
@@ -9,8 +9,8 @@
 
 .foodCategory-own {
   text-align: center;
-  font-family:Impact;
-  font-weight: 300;
+  font-family:serif;
+  font-weight: bolder;
   margin-top:20px;
   font-size: xxx-large;
 
@@ -65,8 +65,27 @@ hr {
   margin-left: -11px;
 }
 
+.col-3.category {
+  display: inline-grid;
+  font-size: 20px;
+  margin-top: 8px;
+}
 
 
+.btn {
+  border: none;
+  font-family: inherit;
+  font-size: 18px;
+}
+
+.row-category {
+  display:inline-flex;
+  margin-left: -30px;
+}
+
+.col-5.map {
+  margin-top: 23px;
+}
 
 
   /* border: none;

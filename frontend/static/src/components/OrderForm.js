@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Col, Row, Form, FormGroup, Input, Label } from 'reactstrap';
+import { Col, Row, Form, FormGroup, Input, Label} from 'reactstrap';
+import 'bootstrap/dist/css/bootstrap.css';
  import './OrderForm.css';
 // import emailjs from 'emailjs-com';
 
@@ -130,13 +131,17 @@ class OrderForm extends Component {
                   name="date"
                   onchange={this.handleChange}
                 />
+                <br />
+                <Label for="special">*Special Instructions</Label>
+                <Input type="textarea" name="text" id="special" onChange={this.handleChange}/>
               </FormGroup>
 
             <FormGroup>
                 <div className="row justify-content-between">
-                <div className="col-12">{orderList}
+                  <div className="col-12 orders">
+                    {orderList}
                   <hr className="solid"/>
-                </div>
+                  </div>
                 </div>
             <div className="row justify-content-center">
               <div className="col-6">

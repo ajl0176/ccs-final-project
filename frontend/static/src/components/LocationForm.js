@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-
-
+import 'bootstrap/dist/css/bootstrap.css';
 import Cookies from 'js-cookie';
-// import GoogleMap from './GoogleMap';
+import './Location.css';
+import moment from 'moment';
 
+// import GoogleMap from './GoogleMap';
 
 class LocationForm extends Component {
 
@@ -11,8 +12,11 @@ class LocationForm extends Component {
     super(props);
 
     this.state ={
-      day: '',
+      date: '',
+      start_time: '',
+      end_time: '',
       location: '',
+      address: '',
       is_active: false,
       map_location:'',
     }
@@ -23,8 +27,8 @@ class LocationForm extends Component {
 
   }
 
-  componentDidMount(){
-    this.fetchEvents()
+  async componentDidMount(){
+    await this.fetchEvents()
   }
 
   handleChange (event){
@@ -46,39 +50,42 @@ class LocationForm extends Component {
     reader.readAsDataURL(file);
   }
 
-    addDate(e){
-    e.preventDefault();
 
-    const csrftoken = Cookies.get('csrftoken');
+  async addDate(event) {
+      event.preventDefault();
+      const form = {...this.state};
+      const options = {
+        method: 'POST',
+        headers: {
+        'X-CSRFToken': Cookies.get('csrftoken'),
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
+      };
+      const handleError = (err) => console.warn(err);
+      await fetch('/api/v1/events/form/', options).catch(handleError);
 
-    // you have to use form data with images
-    let formData = new FormData();
-    // let keys = Object.keys(this.state);
-    formData.append('day', this.state.day);
-    formData.append('location', this.state.location);
-    formData.append('is_active', this.state.is_active);
+    }
 
-    console.log(formData);
-    const options = {
-       method: 'POST',
-       headers: {
-         'X-CSRFToken': csrftoken,
-       },
-       body: formData
-    };
-    fetch('/api/v1/events/form/', options)
-    .then(response => response.json())
-    .then(data => console.log(data))
 
-  };
 
-  // changeLocation(e){
+
+
+
+
+
+
+  //   addDate(e){
   //   e.preventDefault();
   //
   //   const csrftoken = Cookies.get('csrftoken');
-  //
   //   let formData = new FormData();
-  //   formData.append('map_location', this.state.map_location);
+  //   formData.append('date', this.state.day);
+  //   formData.append('start_time', this.state.start_time);
+  //   formData.append('end_time', this.state.end_time);
+  //   formData.append('location', this.state.location);
+  //   formData.append('address', this.state.address);
+  //   formData.append('is_active', this.state.is_active);
   //
   //   console.log(formData);
   //   const options = {
@@ -88,15 +95,17 @@ class LocationForm extends Component {
   //      },
   //      body: formData
   //   };
-  //   fetch('/api/v1/events/locations/', options)
+  //   fetch('/api/v1/events/form/', options)
   //   .then(response => response.json())
   //   .then(data => console.log(data))
-  // }
-
-
+  //
+  // };
 
   async deleteDate(item) {
-    // e.preventDefault();
+    let events = [...this.state.events];
+    const index = events.indexOf(item);
+    events.splice(index, 1);
+    this.setState({events});
 
     const options = {
       method: 'DELETE',
@@ -105,7 +114,7 @@ class LocationForm extends Component {
         },
       };
       const handleError = (err) => console.warn(err);
-      const response =  await fetch (`/api/v1/events/form/${item.id}`, options)
+      const response =  await fetch (`/api/v1/events/${item.id}/`, options)
       const data = await response.json().catch(handleError)
       console.log(data);
     }
@@ -124,28 +133,43 @@ class LocationForm extends Component {
     console.log(this.state.events);
     return (
       <React.Fragment>
-        <form className="col-12 col-md-6 form" onSubmit={(e) => this.addDate(e, this.state)}>
-          <div className="form group" >
-            <label htmlFor="day">Day</label>
-            <input type="text" className="form-control"  id="day" name="day" value={this.state.day} onChange={this.handleChange}/>
-            <label htmlFor="location">Location</label>
-            <input type="text" className="form-control" id="location" name="location" value={this.state.location} onChange={this.handleChange}/>
-            <label htmlFor="is_active">Is Active</label>
-            <input type="checkbox" checked={this.state.is_active} onChange={()=>this.setState(prevState =>({is_active: !prevState.is_active}))} />
-          </div>
-        <button type="submit" className="btn btn-primary">Add Day</button>
-          <div>
-          </div>
+        <form className="col-12" onSubmit={(e) => this.addDate(e, this.state)}>
+          <div className="form group">
+            <div className="row">
+              <div className= "col-5">
+              <br />
+                <div>
+                <label htmlFor="date">Date</label>
+                <input type="date" className="form-control" id="date" name="date" onChange={this.handleChange}/>
 
-      <div className="row mb-2" onSubmit={(e)=> this.changeLocation(e, this.state)}>
-        <div class="col">
-          <label htmlFor="maploction">Map Location</label>
-          <input className="form-control" id="search" type="text" placeholder="Search..." value={this.state.map_location} onChange={this.handleChange}/>
-        </div>
-      <button type="submit" className= "btn btn-primary">Change Location</button>
-      </div>
-      </form>
-      {events}
+                </div>
+                <br />
+                <div>
+                <label htmlFor="start_time">Start Time</label>
+                <input type="time" className="form-control" id="start_time" name="start_time"  onChange={this.handleChange}/>
+                </div>
+                <br />
+                <div>
+                <label htmlFor="end_time">End Time</label>
+                <input type="time" className="form-control" id="end_time" name="end_time" onChange={this.handleChange}/>
+                </div>
+                <label htmlFor="location">Location</label>
+                <input type="text" className="form-control" id="location" name="location" value={this.state.location} onChange={this.handleChange}/>
+                <label htmlFor="address">Address</label>
+                <input type="text" className="form-control" id="address" name="address" value={this.state.address} onChange={this.handleChange}/>
+                <label htmlFor="is_active">Is Active</label>
+                <input type="checkbox" checked={this.state.is_active} onChange={()=>this.setState(prevState =>({is_active: !prevState.is_active}))} />
+                <button type="submit" className="btn btn-primary">Add Date and Locale</button>
+              </div>
+
+              <div className= "col-5">
+              <br />
+              {events}
+              </div>
+            </div>
+          </div>
+        </form>
+
     </React.Fragment>
       );
 
@@ -164,11 +188,11 @@ class LocationForm extends Component {
     }
     render(){
       return (
-        <div className="col-12 col-md-6 form">
+        <div className="col-12">
         <ul className="address-list">
           <div className="row ">
-            <h5 className="col-2">{this.props.item.day}</h5>
-            <h5 className="col-10">{this.props.item.location} </h5>
+            <h5 className="col-5">{this.props.item.day}</h5>
+            <h5 className="col-7">{this.props.item.location} </h5>
           </div>
           <button type="button" className="btn btn-sm btn-light" onClick={()=>this.props.deleteDate(this.props.item)}>Delete</button>
           <hr/>

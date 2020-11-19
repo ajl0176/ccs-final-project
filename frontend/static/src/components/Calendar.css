@@ -5,3 +5,28 @@
 .address-list {
   padding-left: 0px;
 }
+
+.col-3.day {
+  font-size: 18px;
+}
+
+.col-4.time {
+  margin-left: 55px;
+}
+
+.col-11 {
+  margin-left: 40px;
+}
+
+.container {
+  margin-left: 36px;
+  width: 655px;
+}
+
+
+.col-8.day {
+  font-family: serif;
+  font-size: 30px;
+  margin-left: 30px;
+
+}
