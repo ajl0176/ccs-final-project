@@ -9,29 +9,39 @@ class EventItem extends Component  {
   constructor(props){
     super(props);
     this.state = {
+      selected: false,
     }
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(event) {
+    this.setState({
+      selected: !this.state.selected
+    })
+    this.props.selectLocation(this.props.item)
   }
 
   render(){
     return (
 
-        <div className="container" onClick={() => this.props.selectLocation(this.props.item.address)}>
+        <div className="container" onClick={this.handleClick}>
           <ul className="address-list">
-            <div className="list-group-item">
+            <div className={`list-group-item ${this.state.selected ? "location-selected" : null}`}>
 
               <div className="row">
                 <h5 className="col-8 day">{moment.utc(this.props.item.date).format("MMMM D, YYYY")} </h5>
 
-                  <h5 className="col-4 time ">{moment.utc(this.props.item.start_time).format("h:mm a")}</h5>
-                  <h5 className="col-4 time ">{moment.utc(this.props.item.end_time).format("h:mm a")}</h5>
+                  <h5 className="col-4 time location-detail"> From: 11:00 AM</h5>
+                  <h5 className="col-4 time location-detail">Until: 2:00 PM</h5>
               </div>
 
               <div className= "row">
-                <h5 className="col-12">{this.props.item.location}</h5>
+                <h5 className="col-12 location-detail">{this.props.item.location}</h5>
               </div>
 
-              <div>
-                <h5 className="col-11">{this.props.item.address}</h5>
+              <div className= "row">
+                <h5 className="col-12 location-detail">{this.props.item.address}</h5>
               </div>
 
             </div>
@@ -51,7 +61,7 @@ class CalendarList extends Component {
 
       <div className="col">
       <br />
-        <h2 className="locations">Weekly Location</h2>
+        <h2 className="locations">Location Schedule</h2>
       <br />
       {events}
       </div>

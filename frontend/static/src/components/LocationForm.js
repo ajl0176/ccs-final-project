@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import Cookies from 'js-cookie';
 import './Location.css';
-import moment from 'moment';
+
 
 // import GoogleMap from './GoogleMap';
 

@@ -8,4 +8,4 @@ class AdditionSerializer (serializers.ModelSerializer):
 
     class Meta:
         model = AddOn
-        fields = ('id', 'item','price', 'category', 'is_active', 'user')
+        fields = ('id', 'item','price', 'category', 'is_active',)

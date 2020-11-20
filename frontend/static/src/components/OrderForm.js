@@ -22,12 +22,27 @@ class OrderForm extends Component {
       e.preventDefault(); // prevent reload
       // console.log(e.target.orderList.value)
 
+
+      const subtotal = this.props.order.reduce((acc, item)=> {
+      let total = acc + Number(item.price)
+          return total
+      }, 0);
+
+
+
       let orderList = '';
       this.props.order.forEach(item => {
         console.log(item);
-        orderList += item.entree;
+        orderList +=  item.entree
       });
       console.log(orderList);
+
+      // let subtotal = '';
+      // this.props.order.forEach(item.price =>{
+      //   console.log(price);
+      //   subototal += item.price
+      // } )
+
 
       let params = {
         user_id: 'user_sr0w503Gqj0aj0jeBbrWw',
@@ -38,8 +53,10 @@ class OrderForm extends Component {
           'phone': e.target.phone.value,
           'email': e.target.email.value,
           'date': e.target.date.value,
+          'instructions': e.target.instructions.value,
           'orderList': orderList,
-          'subtotal': e.target.subtotal,
+          'subtotal': `$ ${subtotal}`,
+          // 'subtotal': subtotal,
 
         }
       };
@@ -82,9 +99,9 @@ class OrderForm extends Component {
 
       let orderList = this.props.order.map((item, index)=> (
         <div className="d-flex" key={index}>
-          <h5 className="col-8">{item.entree}</h5>
-          <h5 className="col-2">${item.price}</h5>
-          <button type="button" className="btn col-2" onClick={()=>this.props.deleteOrder(item)}>Delete</button>
+          <h5 className="col-8 md={6}">{item.entree}</h5>
+          <h5 className="col-2 md={6}">${item.price}</h5>
+          <strong><button type="button" id="delete-order-item-button" className="btn col-2" onClick={()=>this.props.deleteOrder(item)}>DELETE</button></strong>
         </div>
       ));
 
@@ -131,9 +148,10 @@ class OrderForm extends Component {
                   name="date"
                   onchange={this.handleChange}
                 />
-                <br />
-                <Label for="special">*Special Instructions</Label>
-                <Input type="textarea" name="text" id="special" onChange={this.handleChange}/>
+                </FormGroup>
+                <FormGroup>
+                <Label for="name1">Special Instructions</Label>
+                <Input type="text" name="instructions"  onChange={this.handleChange}/>
               </FormGroup>
 
             <FormGroup>
@@ -143,17 +161,18 @@ class OrderForm extends Component {
                   <hr className="solid"/>
                   </div>
                 </div>
+            </FormGroup>
+            <FormGroup>
             <div className="row justify-content-center">
               <div className="col-6">
                   <div className="subtotal">
                       <h4>Total: ${subtotal}</h4>
-
                   </div>
               </div>
             </div>
 
             <div className="col-6">
-              <input type="submit" className="btn btn-info" value="Check Out"></input>
+              <input type="submit" className="btn btn-info" value="Check Out"/>
             </div>
             </FormGroup>
         </Form>

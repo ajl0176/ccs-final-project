@@ -5,8 +5,8 @@ import './map.css';
 import styled from 'styled-components';
 import CalendarList from './CalendarList';
 import AutoComplete from './Autocomplete';
-import Marker from './Marker';
-import Cookies from 'js-cookie';
+
+
 
 const Wrapper = styled.main`
   width: 100%;
@@ -30,6 +30,7 @@ class GoogleMap extends Component {
     lat: null,
     lng: null,
     selectedLocation: null,
+    selectedLocations: [],
     markers: [],
     };
 
@@ -38,8 +39,29 @@ class GoogleMap extends Component {
     }
 
     selectLocation = (selectedLocation) => {
-      console.log('select location', selectedLocation)
-      this.setState({selectedLocation});
+      console.log('select location', selectedLocation);
+
+
+      const markers = [...this.state.markers];
+      for(let i = 0; i <markers.length; i ++){
+        markers[i].setMap(null);
+      }
+
+
+
+
+      const selectedLocations = [...this.state.selectedLocations];
+      const selected = selectedLocations.includes(selectedLocation);
+
+      if(selected) {
+        const index = selectedLocations.indexOf(selectedLocation);
+        selectedLocations.splice(index, 1);
+      } else {
+        selectedLocations.push(selectedLocation)
+      }
+
+      this.setState({selectedLocation, selectedLocations, markers: []}, this.addMarkers)
+
     }
 
 
@@ -142,15 +164,23 @@ class GoogleMap extends Component {
       this.addMarkers()
     }
 
-    addMarkers = () => this.state.events.forEach(event => this.renderMarkers(event))
+  addMarkers = () => {
+    console.log('firing add markers');
+    if(this.state.selectedLocations.length) {
+      this.state.selectedLocations.forEach(event => this.renderMarkers(event))
+    } else {
+        this.state.events.forEach(event => this.renderMarkers(event))
+    }
+
+  }
 
 
    renderMarkers = async (location) => {
      const address = location.location.replace(/\s/g, '+')
-        const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${'AIzaSyDDemUDBcejm-EJL2t4Edrfghghjh5zhq4'}`);
-       const data = await response.json()
-       const results = data.results[0].geometry;
-       console.log('geocode', results);
+      const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${'AIzaSyDDemUDBcejm-EJL2t4Edrfghghjh5zhq4'}`);
+      const data = await response.json()
+      const results = data.results[0].geometry;
+      console.log('geocode', results);
 
 
 
@@ -189,7 +219,7 @@ class GoogleMap extends Component {
 
     render() {
       const {
-        places, mapApiLoaded, mapInstance, mapApi,
+         mapApiLoaded, mapInstance, mapApi,
       } = this.state;
 
       return (

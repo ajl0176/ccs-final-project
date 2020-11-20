@@ -28,3 +28,10 @@ margin-left: 10px;
 .subtotal {
   margin-left: 153px;
 }
+
+#delete-order-item-button {
+  font-weight: 700;
+  color: red;
+  position: relative;
+  top: -8px
+}

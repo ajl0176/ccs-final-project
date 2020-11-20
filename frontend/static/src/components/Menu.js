@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MenuList from './MenuList';
 import OrderForm from './OrderForm';
-import Cookies from 'js-cookie';
+
 
 class Menu extends Component {
 

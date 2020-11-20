@@ -77,21 +77,42 @@ class MenuForm extends Component {
 
 }
 
- async updateItem(item){
-
-   const id = this.props.match.params.id;
-   await fetch (`/api/v1/menuitems/form/${item.id}`, {
-     method: 'PUT',
-     headers: {
-       'X-CSRFToken': Cookies.get('csrftoken'),
-       'Content-Type': 'application/json',
-     },
-     body: JSON.stringify({entree: this.state.entree, price: this.state.price, description: this.state.description}),
-   });
-   this.props.history.push('/menuitems');
+async addAddOn(event){
+event.preventDefault();
+const form = {...this.state};
+const options = {
+  method: 'POST',
+  headers: {
+  'X-CSRFToken': Cookies.get('csrftoken'),
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(form),
+};
+const handleError = (err) => console.warn(err);
+await fetch('/api/v1/menuitems/form/', options).catch(handleError);
 
 }
 
+ async updateItem(item){
+   item.preventDefault();
+   const id = this.props.match.params.id;
+   // const csrftoken = Cookies.get('csrftoken');
+   const formData = new FormData();
+   formData.append('entree', this.state.entree);
+   formData.append('price', this.state.price);
+   if(this.state.image){
+     formData.append('image', this.state.image);
+   }
+await fetch(`/api/v1/menuitems/form/${item.id}/`, {
+  method: 'PATCH',
+  headers: {
+    'X-CSRFToken': Cookies.get('csrftoken'),
+  },
+  body:formData
+});
+   this.props.history.push('/menuitems');
+
+}
 
 async deleteItem(item) {
 console.log(item)
@@ -116,17 +137,13 @@ console.log(item)
 
   }
 
-handleClose() {
-  this.setState({ show: false})
-}
-
 
 render(){
   let menuitems = this.state.menuItems?.map(item => <AdminItem key={item.id}  deleteItem={this.deleteItem} item={item}/>);
   console.log(this.state.menuItems);
   return(
   <React.Fragment>
-    <form className="col-12 form" onSubmit={(e) => this.addItem(e, this.state)}>
+    <form className="col-12 form mb=6" onSubmit={(e) => this.addItem(e, this.state)}>
       <div className="form group" >
         <div className="row">
           <div className= "col-5">
@@ -142,39 +159,10 @@ render(){
             <img src={this.state.preview} alt=''/>
             <label htmlFor="is_active">Is Active</label>
             <input type="checkbox" checked={this.state.is_active} onChange={()=>this.setState(prevState =>({is_active: !prevState.is_active}))} />
-            <button type="button" className="btn btn-primary" onClick={()=>this.props.updateItem(this.props.item)}>Save Changes</button>
+            <button type="button" className="btn btn-primary">Save</button>
             <button type="submit" className="btn btn-primary">Add Item</button>
             <br />
             <br />
-            <div className="form-check">
-              <input class="form-check-input" type="radio" name="categories" id="proteins" value="option1" checked/>
-              <label class="form-check-label" htmlfor="proteins">
-                Proteins
-              </label>
-            </div>
-            <div className="form-check">
-              <input class="form-check-input" type="radio" name="categories" id="veggies" value="option2"/>
-              <label htmlfor="veggies" class="form-check-label">
-                Veggies
-              </label>
-            </div>
-            <div className="form-check">
-              <input class="form-check-input" type="radio" name="categories" id="highcarbs" value="option3"/>
-              <label htmlfor="highcarbs" class="form-check-label">
-                High Carbs
-              </label>
-            </div>
-            <div>
-              <label htmlfor="addon">Addon</label>
-              <input type="text" className="form-control" id="addon" name="addon" value={this.state.addon} onChange={this.handleChange}/>
-              <label htmlFor="price">Price</label>
-              <input type="text" className="form-control" id="price" name="price" value={this.state.price} onChange={this.handleChange}/>
-              <label htmlFor="is_active">Is Active</label>
-              <input type="checkbox" checked={this.state.is_active} onChange={()=>this.setState(prevState =>({is_active: !prevState.is_active}))} />
-              <div>
-                <button type="submit" className="btn btn-primary">Add Item</button>
-              </div>
-          </div>
           </div>
         <div className="col-5">
         <br />

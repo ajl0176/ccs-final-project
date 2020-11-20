@@ -26,7 +26,7 @@ class AdminMenuitemDetailView (generics.RetrieveUpdateDestroyAPIView):
     def perform_create(self, serializer):
         serializer.save(user = self.request.user)
 
-class AddOnListAPIView (generics.ListAPIView):
+class AddOnListAPIView (generics.ListCreateAPIView):
     queryset = AddOn.objects.filter(is_active=True)
     serializer_class = AddOnSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)

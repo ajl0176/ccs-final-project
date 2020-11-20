@@ -87,6 +87,17 @@ hr {
   margin-top: 23px;
 }
 
+#add-on-button.btn.btn-primary {
+  /* margin-left: 42%; */
+  margin-left: 11.5%;
+}
+
+.addon-selected {
+  color: #000;
+  background-color: #EFC226;
+  border-color: #EFC226
+}
+
 
   /* border: none;
  outline: none;

@@ -16,12 +16,12 @@ class FoodItem extends Component  {
         <div className="container">
           <ul className="menu-list">
               <div className="row ">
-                <h5 className="col-8 ">{this.props.item.entree}</h5>
-                <h5 className="col-2">${this.props.item.price}</h5>
+                <h5 className="col-8 md={6}">{this.props.item.entree}</h5>
+                <h5 className="col-2 mb-{6}">${this.props.item.price}</h5>
               </div>
-                <p className="descript"> {this.props.item.description}</p>
+                <p className="descript md={6}" > {this.props.item.description}</p>
                 <img src={this.props.item.image} alt=""/>
-                <button type="button" className="btn btn-sm btn-light" onClick={()=>this.props.addOrder(this.props.item)}>Add to Order</button>
+                <button type="button" className="btn btn-primary mt-2 ml-0" onClick={()=>this.props.addOrder(this.props.item)}>Add to Order</button>
           <hr className="col-10"/>
           </ul>
         </div>
@@ -48,8 +48,15 @@ class MenuList extends Component {
   addToCreateYourOwn(item) {
     // console.log(item);
     const createYourOwn = [...this.state.createYourOwn];
-    createYourOwn.push(item);
-    this.setState({createYourOwn});
+    if (createYourOwn.includes(item)) {
+      const index = createYourOwn.indexOf(item);
+      createYourOwn.splice(index, 1);
+      this.setState({createYourOwn});
+    } else {
+      createYourOwn.push(item);
+      this.setState({createYourOwn});
+    }
+
   }
 
   addAddOnToOrder() {
@@ -76,7 +83,7 @@ class MenuList extends Component {
       // console.log('single', category)
       const items = this.props.addOns
         .filter(addOn => addOn.category === category)
-        .map(addOn => (<p class="btn btn-outline-dark" type="submit" key={addOn.id} onClick={() => this.addToCreateYourOwn(addOn)}>{addOn.item}  </p>) );
+        .map(addOn => (<p className={`btn btn-outline-dark ${this.state.createYourOwn.includes(addOn) ? 'addon-selected' : null}`} type="submit" key={addOn.id} onClick={() => this.addToCreateYourOwn(addOn)}>{addOn.item}  </p>) );
 
       const prices = this.props.addOns
       .filter(addOn => addOn.category === category)
@@ -119,7 +126,7 @@ class MenuList extends Component {
        <div className="addOns">
         {addOns}
       </div>
-      <button className="button-addons" onClick={this.addAddOnToOrder}>Add to Order</button>
+      <button id="add-on-button" className="button-addons btn btn-primary mt-2" onClick={this.addAddOnToOrder}>Add to Order</button>
       <div>
       <br />
       <br />

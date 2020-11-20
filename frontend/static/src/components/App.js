@@ -9,7 +9,7 @@ import Contact from './Contact';
 import LocationForm from './LocationForm';
 // import CalendarList from './CalendarList';
 // import MenuList from './MenuList';
-// import OrderForm from './OrderForm';
+import Footer from './Footer';
 import LoginForm from './LoginForm';
 import Registration from './Registration';
 import Nav from './Nav';
@@ -119,7 +119,12 @@ class App extends Component {
             <Route path='/locationform' component={LocationForm} />
          </Switch>
 
+
+         <div>
+             <Footer></Footer>
+             </div>
         </React.Fragment>
+      
     );
 
   }
