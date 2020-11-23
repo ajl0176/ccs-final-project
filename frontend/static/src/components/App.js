@@ -4,11 +4,9 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Home from './Home';
 import Menu from './Menu';
 import MenuForm from './MenuForm';
-import GoogleMap from './GoogleMap';
+import Location from './Location';
 import Contact from './Contact';
 import LocationForm from './LocationForm';
-// import CalendarList from './CalendarList';
-// import MenuList from './MenuList';
 import Footer from './Footer';
 import LoginForm from './LoginForm';
 import Registration from './Registration';
@@ -110,7 +108,7 @@ class App extends Component {
           <Switch>
             <Route path='/menuform' component={MenuForm}/>
             <Route path='/menu' component={Menu} />
-            <Route path='/googlemap' component={GoogleMap} />
+            <Route path='/location' component={Location} />
             <Route path='/login' render={(props) => <LoginForm isAuth={this.state.isAuth} handleLogin={this.handleLogin} />}/>
             <Route path='/registration' render={(props) => <Registration isAuth={this.state.isAuth} handleRegistration={this.handleRegistration} />}/>
             <Route path='/' component={Home} exact />
@@ -124,7 +122,7 @@ class App extends Component {
              <Footer></Footer>
              </div>
         </React.Fragment>
-      
+
     );
 
   }

@@ -8,6 +8,7 @@ class Footer extends React.Component
   {
     return (
         <Link to={'/login'} className="nav-login">Admin</Link>
+
     )
   }
 }

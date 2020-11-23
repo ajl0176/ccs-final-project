@@ -53,6 +53,7 @@ class OrderForm extends Component {
           'phone': e.target.phone.value,
           'email': e.target.email.value,
           'date': e.target.date.value,
+          'pickup': e.target.pickup.value,
           'instructions': e.target.instructions.value,
           'orderList': orderList,
           'subtotal': `$ ${subtotal}`,
@@ -148,6 +149,17 @@ class OrderForm extends Component {
                   name="date"
                   onchange={this.handleChange}
                 />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="pickup">Pick-Up Time </Label>
+                  <Input
+                    type="time"
+                    id="pickup"
+                    name="pickup"
+                    min="11:00"
+                    max="14:00"
+                    onChange={this.handleChange}
+                    />
                 </FormGroup>
                 <FormGroup>
                 <Label for="name1">Special Instructions</Label>

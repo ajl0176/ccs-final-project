@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './Contact.css';
+import truck from './../images/truckfacingright.jpeg';
 
 
 
@@ -14,7 +15,7 @@ constructor(props) {
   render() {
     return(
     <div className="contact-title">
-      <img className="contact-pic" src = "308355EA-A4E1-474A-AEBD-8AF760B15577.jpeg" alt="Logo"/>
+      <img className="contact-pic" src={truck} alt="truck"/>
         <div className="centered-title"> Contact Information:</div>
         <div className="centered-phone"> PHONE: 864-616-1151 </div>
         <div className="centered-email"> EMAIL: Organiconthego1@gmail.com</div>

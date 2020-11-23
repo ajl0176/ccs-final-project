@@ -93,24 +93,32 @@ await fetch('/api/v1/menuitems/form/', options).catch(handleError);
 
 }
 
- async updateItem(item){
-   item.preventDefault();
+ async updateItem(item, newItem){
+
+   console.log('id', item.id);
    const id = this.props.match.params.id;
    // const csrftoken = Cookies.get('csrftoken');
+
+   const menuItems = [...this.state.menuItems];
+   const index = menuItems.indexOf(item);
+   console.log('index', index);
+   menuItems[index] = newItem;
+   this.setState({menuItems});
    const formData = new FormData();
-   formData.append('entree', this.state.entree);
-   formData.append('price', this.state.price);
+   formData.append('entree', newItem.entree);
+   formData.append('price', newItem.price);
+   formData.append('description', newItem.description);
    if(this.state.image){
      formData.append('image', this.state.image);
    }
-await fetch(`/api/v1/menuitems/form/${item.id}/`, {
-  method: 'PATCH',
-  headers: {
-    'X-CSRFToken': Cookies.get('csrftoken'),
-  },
-  body:formData
-});
-   this.props.history.push('/menuitems');
+  await fetch(`/api/v1/menuitems/form/${item.id}/`, {
+    method: 'PATCH',
+    headers: {
+      'X-CSRFToken': Cookies.get('csrftoken'),
+    },
+    body:formData
+  });
+   // this.props.history.push('/menuitems');
 
 }
 
@@ -139,7 +147,7 @@ console.log(item)
 
 
 render(){
-  let menuitems = this.state.menuItems?.map(item => <AdminItem key={item.id}  deleteItem={this.deleteItem} item={item}/>);
+  let menuitems = this.state.menuItems?.map(item => <AdminItem key={item.id}  updateItem={this.updateItem} deleteItem={this.deleteItem} item={item}/>);
   console.log(this.state.menuItems);
   return(
   <React.Fragment>
@@ -154,12 +162,16 @@ render(){
             <input type="text" className="form-control" id="price" name="price" value={this.state.price} onChange={this.handleChange}/>
             <label htmlFor="description">Description</label>
             <textarea rows='3' type="text" className="form-control" id="description" name="description" value={this.state.description} onChange={this.handleChange}/>
+            <br/>
             <label htmlFor="image">Image</label>
             <input type="file" id="image" name="image"  onChange={this.handleImage}/>
             <img src={this.state.preview} alt=''/>
+            <br/>
+            <br/>
             <label htmlFor="is_active">Is Active</label>
             <input type="checkbox" checked={this.state.is_active} onChange={()=>this.setState(prevState =>({is_active: !prevState.is_active}))} />
-            <button type="button" className="btn btn-primary">Save</button>
+            <br/>
+            <br />
             <button type="submit" className="btn btn-primary">Add Item</button>
             <br />
             <br />
@@ -182,16 +194,58 @@ class AdminItem extends Component  {
   constructor(props){
     super(props);
     this.state = {
+      isEditing: false,
     }
+
+    this.handleInput = this.handleInput.bind(this);
+    this.handleUpdate = this.handleUpdate.bind(this);
+  }
+
+
+  componentDidMount() {
+    this.setState({...this.props.item})
+  }
+
+  handleInput(e) {
+    this.setState({[e.target.name]: e.target.value});
+  }
+
+  handleUpdate() {
+    this.setState({isEditing: false})
+    this.props.updateItem(this.props.item, this.state);
   }
 
   render(){
     return (
     <form className="col-12">
       <ul className="menu-list">
-          <h5 className="col">{this.props.item.entree}</h5>
-          <h5 className="col">${this.props.item.price} </h5>
-        <p className="col">{this.props.item.description}</p>
+
+          {this.state.isEditing
+          ?
+          <React.Fragment>
+            <input type="text" name="entree" value={this.state.entree} onChange={this.handleInput}/>
+            <br />
+            <br />
+            <input type="text" name="price" value={this.state.price} onChange={this.handleInput}/>
+            <br />
+            <br />
+            <input type="textarea" name="description" value={this.state.description} onChange={this.handleInput}/>
+          </React.Fragment>
+          :
+          <React.Fragment>
+            <h5 className="col">{this.props.item.entree}</h5>
+            <h5 className="col">${this.props.item.price} </h5>
+            <p className="col">{this.props.item.description}</p>
+          </React.Fragment>
+          }
+          <br />
+        {this.state.isEditing
+        ?
+        <button type="button" className="btn btn-sm btn-light" onClick={this.handleUpdate}>Save</button>
+        :
+        <button type="button" className="btn btn-sm btn-light" onClick={()=>this.setState({isEditing: true})}>Edit</button>
+        }
+
         <button type="button" className="btn btn-sm btn-light" onClick={()=>this.props.deleteItem(this.props.item)}>Delete</button>
         <hr/>
       </ul>

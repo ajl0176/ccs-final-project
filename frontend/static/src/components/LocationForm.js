@@ -195,6 +195,7 @@ class LocationForm extends Component {
             <h5 className="col-7">{this.props.item.location} </h5>
           </div>
           <button type="button" className="btn btn-sm btn-light" onClick={()=>this.props.deleteDate(this.props.item)}>Delete</button>
+          <button type="button" className="btn btn-sm btn-light" onClick={()=>this.props.deleteDate(this.props.item)}>Edit</button>
           <hr/>
         </ul>
       </div>

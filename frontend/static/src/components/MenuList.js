@@ -13,13 +13,13 @@ class FoodItem extends Component  {
   render(){
     return (
       <main className="menu-wrapper">
-        <div className="container">
+        <div className="container menuitems">
           <ul className="menu-list">
               <div className="row ">
-                <h5 className="col-8 md={6}">{this.props.item.entree}</h5>
-                <h5 className="col-2 mb-{6}">${this.props.item.price}</h5>
+                <h5 className="col-8">{this.props.item.entree}</h5>
+                <h5 className="col-2">${this.props.item.price}</h5>
               </div>
-                <p className="descript md={6}" > {this.props.item.description}</p>
+                <p className="descript" > {this.props.item.description}</p>
                 <img src={this.props.item.image} alt=""/>
                 <button type="button" className="btn btn-primary mt-2 ml-0" onClick={()=>this.props.addOrder(this.props.item)}>Add to Order</button>
           <hr className="col-10"/>

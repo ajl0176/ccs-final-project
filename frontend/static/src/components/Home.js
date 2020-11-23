@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import './Home.css'
+import logo from './../images/logoblue.jpeg';
 
 class Home extends Component {
 
@@ -10,9 +11,9 @@ class Home extends Component {
 
       <div className = "container-fluid">
         <div className=" align-items-start mb-2">
-          <img className="logo" src = "96D790C9-1646-46D9-B0E4-BDFB94FDFEF5_1_105_c.jpeg" alt="Logo"/>
+          <img className="logo" src={logo} alt="Logo"/>
         </div>
-      </div>  
+      </div>
 
     );
   }

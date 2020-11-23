@@ -1,25 +1,27 @@
 {
   "files": {
-    "main.css": "/static/css/main.e4549a59.chunk.css",
-    "main.js": "/static/js/main.4cdb61d8.chunk.js",
-    "main.js.map": "/static/js/main.4cdb61d8.chunk.js.map",
+    "main.css": "/static/css/main.99b06622.chunk.css",
+    "main.js": "/static/js/main.12eef60c.chunk.js",
+    "main.js.map": "/static/js/main.12eef60c.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.0f5e03bd.js",
     "runtime-main.js.map": "/static/js/runtime-main.0f5e03bd.js.map",
     "static/css/2.95f25948.chunk.css": "/static/css/2.95f25948.chunk.css",
-    "static/js/2.dc1d4f10.chunk.js": "/static/js/2.dc1d4f10.chunk.js",
-    "static/js/2.dc1d4f10.chunk.js.map": "/static/js/2.dc1d4f10.chunk.js.map",
+    "static/js/2.672da5d1.chunk.js": "/static/js/2.672da5d1.chunk.js",
+    "static/js/2.672da5d1.chunk.js.map": "/static/js/2.672da5d1.chunk.js.map",
     "static/js/3.244d8272.chunk.js": "/static/js/3.244d8272.chunk.js",
     "static/js/3.244d8272.chunk.js.map": "/static/js/3.244d8272.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.95f25948.chunk.css.map": "/static/css/2.95f25948.chunk.css.map",
-    "static/css/main.e4549a59.chunk.css.map": "/static/css/main.e4549a59.chunk.css.map",
-    "static/js/2.dc1d4f10.chunk.js.LICENSE.txt": "/static/js/2.dc1d4f10.chunk.js.LICENSE.txt"
+    "static/css/main.99b06622.chunk.css.map": "/static/css/main.99b06622.chunk.css.map",
+    "static/js/2.672da5d1.chunk.js.LICENSE.txt": "/static/js/2.672da5d1.chunk.js.LICENSE.txt",
+    "static/media/logoblue.56f3b240.jpeg": "/static/media/logoblue.56f3b240.jpeg",
+    "static/media/truckfacingright.047c8684.jpeg": "/static/media/truckfacingright.047c8684.jpeg"
   },
   "entrypoints": [
     "static/js/runtime-main.0f5e03bd.js",
     "static/css/2.95f25948.chunk.css",
-    "static/js/2.dc1d4f10.chunk.js",
-    "static/css/main.e4549a59.chunk.css",
-    "static/js/main.4cdb61d8.chunk.js"
+    "static/js/2.672da5d1.chunk.js",
+    "static/css/main.99b06622.chunk.css",
+    "static/js/main.12eef60c.chunk.js"
   ]
 }
